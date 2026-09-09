@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>StudentTrack - Counsellor Portal</title>
+
+    <link
+        rel="stylesheet"
+        href="./counsellor.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="brand">
+
+        <div class="brand-logo">
+            S
+        </div>
+
+        <div class="brand-text">
+
+            <h2>
+                StudentTrack
+            </h2>
+
+            <p>
+                Counsellor Portal
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <nav class="sidebar-nav">
+
+        <a
+            href="#dashboard"
+            class="nav-item active"
+        >
+            📊
+            <span>Dashboard</span>
+        </a>
+
+
+        <a
+            href="#students"
+            class="nav-item"
+        >
+            🎓
+            <span>Students</span>
+        </a>
+
+
+        <a
+            href="#marks"
+            class="nav-item"
+        >
+            📝
+            <span>Marks</span>
+        </a>
+
+
+        <a
+            href="#recent"
+            class="nav-item"
+        >
+            📋
+            <span>Recent Uploads</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a
+            href="./index.html"
+            class="nav-item"
+        >
+            ↩️
+            <span>Student Portal</span>
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+
+<!-- =====================================================
+     TOP HEADER
+===================================================== -->
+
+<header class="top-header">
+
+    <div>
+
+        <h1>
+            Counsellor Dashboard
+        </h1>
+
+        <p>
+            Manage students and academic performance
+        </p>
+
+    </div>
+
+
+    <div class="header-badge">
+
+        <span class="status-dot"></span>
+
+        Firebase Connected
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     DASHBOARD STATS
+===================================================== -->
+
+<section
+    id="dashboard"
+    class="stats-grid"
+>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            🎓
+        </div>
+
+        <div>
+
+            <span class="stat-label">
+                Total Students
+            </span>
+
+            <h2 id="totalStudents">
+                0
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            📝
+        </div>
+
+        <div>
+
+            <span class="stat-label">
+                Mark Entries
+            </span>
+
+            <h2 id="totalMarks">
+                0
+            </h2>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            📊
+        </div>
+
+        <div>
+
+            <span class="stat-label">
+                Average Percentage
+            </span>
+
+            <h2 id="averagePercentage">
+                0%
+            </h2>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CREATE STUDENT ACCOUNT
+===================================================== -->
+
+<section class="panel">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                Create Student Account
+            </h2>
+
+            <p>
+                Create login credentials for a student
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <form
+        id="studentAccountForm"
+        class="form-grid"
+    >
+
+
+        <div class="form-group">
+
+            <label for="accountStudentName">
+                Student Name
+            </label>
+
+            <input
+                type="text"
+                id="accountStudentName"
+                placeholder="Enter student name"
+                required
+            >
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="accountStudentId">
+                Student ID
+            </label>
+
+            <input
+                type="text"
+                id="accountStudentId"
+                placeholder="Example: 23CS101"
+                required
+            >
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="accountEmail">
+                Gmail
+            </label>
+
+            <input
+                type="email"
+                id="accountEmail"
+                placeholder="student@gmail.com"
+                required
+            >
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="accountPassword">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="accountPassword"
+                placeholder="Minimum 6 characters"
+                minlength="6"
+                required
+            >
+
+        </div>
+
+
+
+        <div class="form-action">
+
+            <button
+                type="submit"
+                id="createStudentButton"
+                class="primary-button"
+            >
+                Create Student Account
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+    <div
+        id="studentAccountMessage"
+        class="message"
+    ></div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BULK MARK ENTRY
+===================================================== -->
+
+<section
+    id="marks"
+    class="panel"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                Bulk Mark Entry
+            </h2>
+
+            <p>
+                Upload marks for all 6 subjects at once
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <form
+        id="bulkMarksForm"
+        class="form-grid"
+    >
+
+
+        <div class="form-group">
+
+            <label for="bulkStudentId">
+                Student ID
+            </label>
+
+            <input
+                type="text"
+                id="bulkStudentId"
+                placeholder="Example: 23CS101"
+                required
+            >
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="bulkStudentName">
+                Student Name
+            </label>
+
+            <input
+                type="text"
+                id="bulkStudentName"
+                placeholder="Enter student name"
+                required
+            >
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="semester">
+                Semester
+            </label>
+
+            <select
+                id="semester"
+                required
+            >
+
+                <option value="">
+                    Select Semester
+                </option>
+
+                <option value="1">
+                    Semester 1
+                </option>
+
+                <option value="2">
+                    Semester 2
+                </option>
+
+                <option value="3">
+                    Semester 3
+                </option>
+
+                <option value="4">
+                    Semester 4
+                </option>
+
+                <option value="5">
+                    Semester 5
+                </option>
+
+                <option value="6">
+                    Semester 6
+                </option>
+
+                <option value="7">
+                    Semester 7
+                </option>
+
+                <option value="8">
+                    Semester 8
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label for="modelExam">
+                Model Exam
+            </label>
+
+            <select
+                id="modelExam"
+                required
+            >
+
+                <option value="">
+                    Select Exam
+                </option>
+
+                <option value="Model Exam 1">
+                    Model Exam 1
+                </option>
+
+                <option value="Model Exam 2">
+                    Model Exam 2
+                </option>
+
+                <option value="Model Exam 3">
+                    Model Exam 3
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- SUBJECTS -->
+
+        <div class="subjects-section">
+
+            <h3>
+                Subject Marks
+            </h3>
+
+
+            <div class="subjects-grid">
+
+
+                <div class="subject-box">
+
+                    <label>
+                        Data Structures
+                    </label>
+
+                    <input
+                        type="number"
+                        class="subject-mark"
+                        data-subject="Data Structures"
+                        min="0"
+                        max="50"
+                        placeholder="0 - 50"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="subject-box">
+
+                    <label>
+                        Java Programming
+                    </label>
+
+                    <input
+                        type="number"
+                        class="subject-mark"
+                        data-subject="Java Programming"
+                        min="0"
+                        max="50"
+                        placeholder="0 - 50"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="subject-box">
+
+                    <label>
+                        Mathematics
+                    </label>
+
+                    <input
+                        type="number"
+                        class="subject-mark"
+                        data-subject="Mathematics"
+                        min="0"
+                        max="50"
+                        placeholder="0 - 50"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="subject-box">
+
+                    <label>
+                        Computer Networks
+                    </label>
+
+                    <input
+                        type="number"
+                        class="subject-mark"
+                        data-subject="Computer Networks"
+                        min="0"
+                        max="50"
+                        placeholder="0 - 50"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="subject-box">
+
+                    <label>
+                        Operating Systems
+                    </label>
+
+                    <input
+                        type="number"
+                        class="subject-mark"
+                        data-subject="Operating Systems"
+                        min="0"
+                        max="50"
+                        placeholder="0 - 50"
+                        required
+                    >
+
+                </div>
+
+
+
+                <div class="subject-box">
+
+                    <label>
+                        Database Management
+                    </label>
+
+                    <input
+                        type="number"
+                        class="subject-mark"
+                        data-subject="Database Management"
+                        min="0"
+                        max="50"
+                        placeholder="0 - 50"
+                        required
+                    >
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="form-action">
+
+            <button
+                type="submit"
+                id="bulkUploadButton"
+                class="primary-button"
+            >
+                Upload All 6 Subject Marks
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+    <div
+        id="bulkMarksMessage"
+        class="message"
+    ></div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STUDENTS
+===================================================== -->
+
+<section
+    id="students"
+    class="panel"
+>
+
+    <div class="panel-header students-header">
+
+        <div>
+
+            <h2>
+                Students
+            </h2>
+
+            <p>
+                Each student is shown as one card
+            </p>
+
+        </div>
+
+
+        <div class="student-count-badge">
+
+            <span id="studentCardCount">
+                0
+            </span>
+
+            Students
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="studentCards"
+        class="student-cards"
+    >
+
+        <div class="loading-card">
+
+            <div class="loading-spinner"></div>
+
+            <p>
+                Loading students...
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STUDENT MARKS MODAL
+===================================================== -->
+
+<div
+    id="marksModal"
+    class="modal-overlay"
+>
+
+    <div class="marks-modal">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="modalStudentName">
+                    Student Marks
+                </h2>
+
+                <p id="modalStudentInfo">
+                    Student information
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                id="closeMarksModal"
+                class="modal-close"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <div
+            id="marksSaveMessage"
+            class="modal-message"
+        ></div>
+
+
+
+        <div
+            id="studentMarksContainer"
+            class="student-marks-container"
+        >
+
+            <!-- Marks generated by JavaScript -->
+
+        </div>
+
+
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                id="cancelMarksButton"
+                class="secondary-button"
+            >
+                Close
+            </button>
+
+
+            <button
+                type="button"
+                id="saveAllMarksButton"
+                class="primary-button"
+            >
+                Save All Changes
+            </button>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     DELETE CONFIRMATION MODAL
+===================================================== -->
+
+<div
+    id="deleteModal"
+    class="modal-overlay"
+>
+
+    <div class="delete-modal">
+
+
+        <div class="delete-icon">
+            ⚠️
+        </div>
+
+
+        <h2>
+            Delete Student?
+        </h2>
+
+
+        <p id="deleteStudentMessage">
+            This action cannot be undone.
+        </p>
+
+
+        <div class="delete-warning">
+
+            The student's profile and all uploaded marks
+            will be permanently deleted.
+
+        </div>
+
+
+        <div class="modal-footer">
+
+
+            <button
+                type="button"
+                id="cancelDeleteButton"
+                class="secondary-button"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                type="button"
+                id="confirmDeleteButton"
+                class="danger-button"
+            >
+                Delete Student
+            </button>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        StudentTrack © 2026 | Counsellor Portal
+    </p>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script
+    type="module"
+    src="./counsellor.js"
+></script>
+
+
+</main>
+
+</body>
+
+</html>

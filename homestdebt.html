@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        StudentTrack - Dashboard
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="./homestdebt.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ===================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>
+                StudentTrack
+            </h2>
+
+            <p>
+                Student Portal
+            </p>
+
+        </div>
+
+
+        <nav>
+
+            <a
+                href="#"
+                class="active"
+            >
+                Dashboard
+            </a>
+
+        </nav>
+
+
+        <button
+            id="logoutButton"
+            class="logout-button"
+        >
+            Logout
+        </button>
+
+    </aside>
+
+
+
+    <!-- ===================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================== -->
+
+    <main class="main-content">
+
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <h1>
+                Student Dashboard
+            </h1>
+
+            <p>
+                Welcome back,
+                <span id="studentName">
+                    Loading...
+                </span>
+            </p>
+
+        </header>
+
+
+
+        <!-- ===================================== -->
+        <!-- STUDENT PROFILE -->
+        <!-- ===================================== -->
+
+        <section class="student-card">
+
+
+            <div class="profile-item">
+
+                <span>
+                    Student Name
+                </span>
+
+                <h2 id="profileName">
+                    Loading...
+                </h2>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span>
+                    Student ID
+                </span>
+
+                <h2 id="profileId">
+                    Loading...
+                </h2>
+
+            </div>
+
+
+            <div class="profile-item">
+
+                <span>
+                    Email
+                </span>
+
+                <h2 id="profileEmail">
+                    Loading...
+                </h2>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ===================================== -->
+        <!-- STATISTICS -->
+        <!-- ===================================== -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Exams
+                </h3>
+
+                <p id="totalExams">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Subjects
+                </h3>
+
+                <p id="totalSubjects">
+                    0
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Average
+                </h3>
+
+                <p id="averagePercentage">
+                    0%
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>
+                    Total Marks
+                </h3>
+
+                <p id="totalMarks">
+                    0/0
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ===================================== -->
+        <!-- MARKS -->
+        <!-- ===================================== -->
+
+        <section class="marks-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        My Marks
+                    </h2>
+
+                    <p>
+                        Marks uploaded by your counsellor
+                    </p>
+
+                </div>
+
+
+                <select
+                    id="semesterFilter"
+                >
+
+                    <option value="all">
+                        All Semesters
+                    </option>
+
+                    <option value="1">
+                        Semester 1
+                    </option>
+
+                    <option value="2">
+                        Semester 2
+                    </option>
+
+                    <option value="3">
+                        Semester 3
+                    </option>
+
+                    <option value="4">
+                        Semester 4
+                    </option>
+
+                    <option value="5">
+                        Semester 5
+                    </option>
+
+                    <option value="6">
+                        Semester 6
+                    </option>
+
+                    <option value="7">
+                        Semester 7
+                    </option>
+
+                    <option value="8">
+                        Semester 8
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Semester
+                            </th>
+
+                            <th>
+                                Exam
+                            </th>
+
+                            <th>
+                                Subject
+                            </th>
+
+                            <th>
+                                Marks
+                            </th>
+
+                            <th>
+                                Percentage
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="marksTableBody">
+
+                        <tr>
+
+                            <td
+                                colspan="5"
+                                class="loading"
+                            >
+                                Loading marks...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- ===================================== -->
+    <!-- JAVASCRIPT -->
+    <!-- ===================================== -->
+
+    <script
+        type="module"
+        src="./homestdebt.js"
+    ></script>
+
+
+</body>
+
+</html>

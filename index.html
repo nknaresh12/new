@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>StudentTrack | Progress Management</title>
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================
+           BODY
+        ========================================= */
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(118, 103, 248, 0.14),
+                    transparent 32%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(118, 103, 248, 0.10),
+                    transparent 30%
+                ),
+                #f7f8fc;
+
+            color: #171827;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .page {
+            width: 100%;
+            max-width: 1100px;
+
+            background: rgba(255, 255, 255, 0.94);
+
+            border: 1px solid rgba(255, 255, 255, 0.8);
+
+            border-radius: 28px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 30px 80px
+                rgba(31, 35, 65, 0.12);
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+        }
+
+
+        /* =========================================
+           LEFT SIDE
+        ========================================= */
+
+        .hero {
+            position: relative;
+
+            padding: 60px 55px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #7667f8,
+                    #6657e8
+                );
+
+            color: white;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            min-height: 650px;
+
+            overflow: hidden;
+        }
+
+
+        .hero::before {
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.08);
+
+            top: -100px;
+            right: -90px;
+        }
+
+
+        .hero::after {
+            content: "";
+
+            position: absolute;
+
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            bottom: -70px;
+            left: -50px;
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .brand {
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 70px;
+        }
+
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255, 255, 255, 0.18);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+
+        .brand-name {
+            font-size: 20px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.4px;
+        }
+
+
+        /* =========================================
+           HERO CONTENT
+        ========================================= */
+
+        .hero-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 12px;
+
+            border-radius: 50px;
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.15);
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            margin-bottom: 22px;
+        }
+
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+        }
+
+
+        .hero h1 {
+            font-size: clamp(38px, 4vw, 54px);
+
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .hero h1 span {
+            opacity: 0.78;
+        }
+
+
+        .hero-description {
+            max-width: 430px;
+
+            color:
+                rgba(255, 255, 255, 0.78);
+
+            line-height: 1.7;
+
+            font-size: 15px;
+
+            margin-bottom: 38px;
+        }
+
+
+        /* =========================================
+           FEATURES
+        ========================================= */
+
+        .features {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+
+        .feature {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            font-size: 14px;
+
+            color:
+                rgba(255, 255, 255, 0.86);
+        }
+
+
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           RIGHT SIDE
+        ========================================= */
+
+        .access-panel {
+            padding: 55px 50px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .access-header {
+            margin-bottom: 32px;
+        }
+
+
+        .access-header h2 {
+            font-size: 29px;
+
+            letter-spacing: -0.8px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .access-header p {
+            color: #7b7d8c;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           ACCESS CARDS
+        ========================================= */
+
+        .access-options {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 16px;
+        }
+
+
+        .access-card {
+            width: 100%;
+
+            border: 1px solid #e9e9ef;
+
+            background: #ffffff;
+
+            border-radius: 17px;
+
+            padding: 20px;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 16px;
+        }
+
+
+        .access-card:hover {
+            transform: translateY(-2px);
+
+            border-color: #cfcaff;
+
+            box-shadow:
+                0 12px 30px
+                rgba(31, 35, 65, 0.08);
+        }
+
+
+        .access-icon {
+            flex-shrink: 0;
+
+            width: 48px;
+            height: 48px;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 21px;
+
+            background: #f1efff;
+
+            color: #7667f8;
+        }
+
+
+        .access-info {
+            flex: 1;
+        }
+
+
+        .access-info h3 {
+            color: #20212e;
+
+            font-size: 15px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .access-info p {
+            color: #8a8c99;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        .arrow {
+            color: #b0b1bd;
+
+            font-size: 20px;
+
+            transition:
+                transform 0.2s ease;
+        }
+
+
+        .access-card:hover .arrow {
+            transform: translateX(3px);
+
+            color: #7667f8;
+        }
+
+
+        /* =========================================
+           ADMIN LOGIN FORM
+        ========================================= */
+
+        .admin-form {
+            display: none;
+
+            animation:
+                fadeIn 0.25s ease;
+        }
+
+
+        .admin-form.active {
+            display: block;
+        }
+
+
+        @keyframes fadeIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        .back-button {
+            border: none;
+
+            background: transparent;
+
+            color: #77798a;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            padding: 0;
+
+            margin-bottom: 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+        }
+
+
+        .back-button:hover {
+            color: #7667f8;
+        }
+
+
+        .admin-title {
+            margin-bottom: 25px;
+        }
+
+
+        .admin-title h2 {
+            font-size: 28px;
+
+            letter-spacing: -0.8px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .admin-title p {
+            color: #858795;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        .input-group {
+            margin-bottom: 17px;
+        }
+
+
+        .input-group label {
+            display: block;
+
+            color: #353643;
+
+            font-size: 13px;
+
+            font-weight: 650;
+
+            margin-bottom: 8px;
+        }
+
+
+        .input-wrapper {
+            position: relative;
+        }
+
+
+        .input-icon {
+            position: absolute;
+
+            left: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #a2a3ae;
+
+            font-size: 15px;
+        }
+
+
+        .input-group input {
+            width: 100%;
+
+            padding: 13px 14px 13px 42px;
+
+            border:
+                1px solid #dedfe6;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            color: #252632;
+
+            background: #fafafd;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .input-group input:focus {
+            border-color: #7667f8;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(118, 103, 248, 0.10);
+        }
+
+
+        .admin-login-button {
+            width: 100%;
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 14px;
+
+            background: #7667f8;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 5px;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        .admin-login-button:hover {
+            background: #6657e8;
+
+            transform: translateY(-1px);
+        }
+
+
+        .admin-login-button:active {
+            transform: translateY(0);
+        }
+
+
+        .admin-message {
+            min-height: 20px;
+
+            margin-top: 14px;
+
+            text-align: center;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        .admin-message.error {
+            color: #e04b4b;
+        }
+
+
+        .admin-message.success {
+            color: #2f8a55;
+        }
+
+
+        .security-note {
+            margin-top: 25px;
+
+            padding: 12px 14px;
+
+            border-radius: 10px;
+
+            background: #f7f7fb;
+
+            color: #8a8b96;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            text-align: center;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .footer {
+            margin-top: 34px;
+
+            text-align: center;
+
+            color: #aaa;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            body {
+                padding: 15px;
+            }
+
+
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+
+            .hero {
+                min-height: auto;
+
+                padding: 40px 35px;
+            }
+
+
+            .brand {
+                margin-bottom: 40px;
+            }
+
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+
+            .features {
+                display: none;
+            }
+
+
+            .access-panel {
+                padding: 40px 30px;
+            }
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            body {
+                padding: 0;
+            }
+
+
+            .page {
+                border-radius: 0;
+
+                min-height: 100vh;
+            }
+
+
+            .hero {
+                padding: 35px 25px;
+            }
+
+
+            .access-panel {
+                padding: 35px 25px;
+            }
+
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="page">
+
+
+        <!-- =====================================
+             LEFT HERO
+        ====================================== -->
+
+        <section class="hero">
+
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    S
+                </div>
+
+                <div class="brand-name">
+                    StudentTrack
+                </div>
+
+            </div>
+
+
+            <div class="hero-content">
+
+                <div class="badge">
+
+                    <span class="badge-dot"></span>
+
+                    Progress made simple
+
+                </div>
+
+
+                <h1>
+
+                    Your progress.
+                    <br>
+
+                    <span>Your future.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    A centralized platform for managing
+                    academic performance, examination
+                    marks, and student progress.
+
+                </p>
+
+
+                <div class="features">
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        Secure student access
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        Semester-wise performance
+
+                    </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        Centralized academic records
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             RIGHT ACCESS PANEL
+        ====================================== -->
+
+        <section class="access-panel">
+
+
+            <!-- MAIN OPTIONS -->
+
+            <div
+                id="mainOptions"
+            >
+
+                <div class="access-header">
+
+                    <h2>
+                        Welcome back
+                    </h2>
+
+                    <p>
+                        Choose your portal to continue
+                        to StudentTrack.
+                    </p>
+
+                </div>
+
+
+                <div class="access-options">
+
+
+                    <!-- STUDENT -->
+
+                    <button
+                        class="access-card"
+                        id="studentButton"
+                    >
+
+                        <div class="access-icon">
+                            🎓
+                        </div>
+
+
+                        <div class="access-info">
+
+                            <h3>
+                                Student Login
+                            </h3>
+
+                            <p>
+                                View your marks,
+                                examinations and
+                                academic progress.
+                            </p>
+
+                        </div>
+
+
+                        <div class="arrow">
+                            →
+                        </div>
+
+                    </button>
+
+
+
+                    <!-- ADMIN -->
+
+                    <button
+                        class="access-card"
+                        id="adminButton"
+                    >
+
+                        <div class="access-icon">
+                            ⚙
+                        </div>
+
+
+                        <div class="access-info">
+
+                            <h3>
+                                Admin Login
+                            </h3>
+
+                            <p>
+                                Manage students,
+                                marks and academic
+                                records.
+                            </p>
+
+                        </div>
+
+
+                        <div class="arrow">
+                            →
+                        </div>
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="footer">
+
+                    StudentTrack • Academic
+                    Progress Management
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ADMIN LOGIN -->
+
+            <div
+                id="adminForm"
+                class="admin-form"
+            >
+
+
+                <button
+                    class="back-button"
+                    id="backButton"
+                >
+
+                    ← Back to portal selection
+
+                </button>
+
+
+                <div class="admin-title">
+
+                    <h2>
+                        Admin access
+                    </h2>
+
+                    <p>
+                        Sign in to manage student
+                        academic records.
+                    </p>
+
+                </div>
+
+
+                <form
+                    id="adminLoginForm"
+                >
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group">
+
+                        <label for="adminEmail">
+                            Email address
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span
+                                class="input-icon"
+                            >
+                                ✉
+                            </span>
+
+
+                            <input
+                                type="email"
+                                id="adminEmail"
+                                placeholder="Enter admin email"
+                                autocomplete="username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="adminPassword">
+                            Password
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            <span
+                                class="input-icon"
+                            >
+                                🔒
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="adminPassword"
+                                placeholder="Enter admin password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- LOGIN -->
+
+                    <button
+                        type="submit"
+                        class="admin-login-button"
+                        id="adminLoginButton"
+                    >
+                        Sign in as Admin
+                    </button>
+
+
+                    <div
+                        id="adminMessage"
+                        class="admin-message"
+                    ></div>
+
+
+                </form>
+
+
+                <div class="security-note">
+
+                    Admin access is restricted to
+                    authorized personnel.
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script>
+
+        // =====================================
+        // ELEMENTS
+        // =====================================
+
+        const mainOptions =
+            document.getElementById(
+                "mainOptions"
+            );
+
+
+        const adminForm =
+            document.getElementById(
+                "adminForm"
+            );
+
+
+        const studentButton =
+            document.getElementById(
+                "studentButton"
+            );
+
+
+        const adminButton =
+            document.getElementById(
+                "adminButton"
+            );
+
+
+        const backButton =
+            document.getElementById(
+                "backButton"
+            );
+
+
+        const adminLoginForm =
+            document.getElementById(
+                "adminLoginForm"
+            );
+
+
+        const adminMessage =
+            document.getElementById(
+                "adminMessage"
+            );
+
+
+        const adminLoginButton =
+            document.getElementById(
+                "adminLoginButton"
+            );
+
+
+
+        // =====================================
+        // STUDENT LOGIN
+        // =====================================
+
+        studentButton.addEventListener(
+            "click",
+            function() {
+
+                window.location.href =
+                    "./homestdebt.html";
+
+            }
+        );
+
+
+
+        // =====================================
+        // OPEN ADMIN LOGIN
+        // =====================================
+
+        adminButton.addEventListener(
+            "click",
+            function() {
+
+                mainOptions.style.display =
+                    "none";
+
+                adminForm.classList.add(
+                    "active"
+                );
+
+                document
+                    .getElementById("adminEmail")
+                    .focus();
+
+            }
+        );
+
+
+
+        // =====================================
+        // BACK BUTTON
+        // =====================================
+
+        backButton.addEventListener(
+            "click",
+            function() {
+
+                adminForm.classList.remove(
+                    "active"
+                );
+
+                mainOptions.style.display =
+                    "block";
+
+                adminLoginForm.reset();
+
+                adminMessage.textContent =
+                    "";
+
+            }
+        );
+
+
+
+        // =====================================
+        // ADMIN LOGIN
+        // =====================================
+
+        adminLoginForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document
+                        .getElementById("adminEmail")
+                        .value
+                        .trim()
+                        .toLowerCase();
+
+
+                const password =
+                    document
+                        .getElementById("adminPassword")
+                        .value;
+
+
+
+                // =================================
+                // ADMIN CREDENTIALS
+                // =================================
+
+                const adminEmail =
+                    "nknaresh2008@gmail.com";
+
+                const adminPassword =
+                    "1212";
+
+
+
+                // =================================
+                // CHECK
+                // =================================
+
+                if (
+                    email === adminEmail &&
+                    password === adminPassword
+                ) {
+
+
+                    adminMessage.textContent =
+                        "Login successful. Opening admin dashboard...";
+
+
+                    adminMessage.className =
+                        "admin-message success";
+
+
+                    adminLoginButton.disabled =
+                        true;
+
+
+                    adminLoginButton.textContent =
+                        "Opening...";
+
+
+                    setTimeout(
+                        function() {
+
+                            window.location.href =
+                                "./counsellor.html";
+
+                        },
+                        500
+                    );
+
+                }
+
+                else {
+
+
+                    adminMessage.textContent =
+                        "Incorrect admin email or password.";
+
+                    adminMessage.className =
+                        "admin-message error";
+
+
+                    document
+                        .getElementById(
+                            "adminPassword"
+                        )
+                        .value = "";
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
