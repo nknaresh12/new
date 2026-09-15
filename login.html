@@ -5,444 +5,291 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>StudentTrack - Login</title>
+    <title>Student Login | StudentTrack</title>
 
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            background: #f5f6fb;
-        }
-
-        .login-container {
-            width: 100%;
-            max-width: 420px;
-            padding: 20px;
-        }
-
-        .login-card {
-            background: white;
-
-            padding: 40px;
-
-            border-radius: 18px;
-
-            box-shadow:
-                0 10px 30px
-                rgba(0, 0, 0, 0.08);
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .logo h1 {
-            color: #7667f8;
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
-
-        .logo p {
-            color: #777;
-            font-size: 14px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-
-            margin-bottom: 8px;
-
-            font-weight: 600;
-
-            color: #333;
-        }
-
-        .form-group input {
-            width: 100%;
-
-            padding: 13px;
-
-            border: 1px solid #ddd;
-
-            border-radius: 8px;
-
-            font-size: 15px;
-
-            outline: none;
-        }
-
-        .form-group input:focus {
-            border-color: #7667f8;
-        }
-
-        .login-button {
-            width: 100%;
-
-            padding: 14px;
-
-            border: none;
-
-            border-radius: 8px;
-
-            background: #7667f8;
-
-            color: white;
-
-            font-size: 16px;
-
-            font-weight: 600;
-
-            cursor: pointer;
-        }
-
-        .login-button:hover {
-            background: #6557e8;
-        }
-
-        .login-button:disabled {
-            background: #aaa;
-            cursor: not-allowed;
-        }
-
-        .message {
-            margin-top: 15px;
-
-            text-align: center;
-
-            font-size: 14px;
-
-            min-height: 20px;
-        }
-
-        .message.error {
-            color: #e53935;
-        }
-
-        .message.success {
-            color: #2e7d32;
-        }
-
-    </style>
+    <link
+        rel="stylesheet"
+        href="./login.css"
+    >
 
 </head>
 
 
 <body>
 
-    <div class="login-container">
+    <main class="login-page">
 
-        <div class="login-card">
+        <!-- =====================================
+             LEFT SIDE
+        ====================================== -->
 
-            <div class="logo">
+        <section class="brand-section">
 
-                <h1>
-                    StudentTrack
-                </h1>
+            <div class="brand">
 
-                <p>
-                    Student Progress Management System
-                </p>
+                <div class="brand-icon">
+                    S
+                </div>
+
+                <div>
+
+                    <h2>
+                        StudentTrack
+                    </h2>
+
+                    <p>
+                        Student Progress Management
+                    </p>
+
+                </div>
 
             </div>
 
 
-            <form id="loginForm">
+            <div class="brand-content">
 
-                <div class="form-group">
+                <span class="badge">
+                    STUDENT PORTAL
+                </span>
 
-                    <label for="email">
-                        Gmail
-                    </label>
 
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter your Gmail"
-                        required
-                    >
+                <h1>
+                    Track your progress.
+                    <br>
+                    Build your future.
+                </h1>
+
+
+                <p>
+
+                    View your examination marks,
+                    semester performance and
+                    academic progress in one place.
+
+                </p>
+
+
+                <div class="feature">
+
+                    <span>✓</span>
+
+                    <div>
+
+                        <strong>
+                            View Your Marks
+                        </strong>
+
+                        <small>
+                            Access marks uploaded by your counsellor.
+                        </small>
+
+                    </div>
 
                 </div>
 
 
-                <div class="form-group">
+                <div class="feature">
+
+                    <span>✓</span>
+
+                    <div>
+
+                        <strong>
+                            Semester Performance
+                        </strong>
+
+                        <small>
+                            Track your performance semester by semester.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <div class="feature">
+
+                    <span>✓</span>
+
+                    <div>
+
+                        <strong>
+                            Secure Access
+                        </strong>
+
+                        <small>
+                            Only your academic records are displayed.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             RIGHT SIDE
+        ====================================== -->
+
+        <section class="login-section">
+
+            <div class="login-box">
+
+
+                <div class="login-icon">
+                    🎓
+                </div>
+
+
+                <h1>
+                    Student Login
+                </h1>
+
+
+                <p class="subtitle">
+
+                    Sign in using the Gmail account
+                    and password provided by your counsellor.
+
+                </p>
+
+
+                <form id="loginForm">
+
+
+                    <!-- EMAIL -->
+
+                    <label for="email">
+                        Gmail Address
+                    </label>
+
+
+                    <div class="input-container">
+
+                        <span>
+                            ✉
+                        </span>
+
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="student@gmail.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
 
                     <label for="password">
                         Password
                     </label>
 
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter your password"
-                        required
+
+                    <div class="input-container">
+
+                        <span>
+                            🔑
+                        </span>
+
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ERROR / SUCCESS MESSAGE -->
+
+                    <p id="message"></p>
+
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        id="loginButton"
+                        class="login-button"
                     >
+                        Login
+                    </button>
+
+                </form>
+
+
+
+                <!-- INFORMATION -->
+
+                <div class="info-box">
+
+                    <span>
+                        ⓘ
+                    </span>
+
+                    <p>
+
+                        Your Gmail and password are
+                        provided by your counsellor.
+
+                    </p>
 
                 </div>
 
 
-                <button
-                    type="submit"
-                    id="loginButton"
-                    class="login-button"
+
+                <!-- BACK -->
+
+                <a
+                    href="./index.html"
+                    class="back-link"
                 >
-                    Login
-                </button>
+                    ← Back to Portal
+                </a>
 
 
-                <div
-                    id="loginMessage"
-                    class="message"
-                ></div>
+            </div>
 
-            </form>
+        </section>
 
-        </div>
+    </main>
 
-    </div>
 
 
-    <script type="module">
+    <!-- JAVASCRIPT -->
 
-        import {
-            initializeApp
-        } from
-        "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    <script
+        type="module"
+        src="./login.js"
+    ></script>
 
-
-        import {
-            getAuth,
-            signInWithEmailAndPassword
-        } from
-        "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-
-        // ==========================================
-        // FIREBASE CONFIG
-        // ==========================================
-
-        const firebaseConfig = {
-
-            apiKey:
-                "AIzaSyByRLQj6i2c2GhM21-cmRkSISbIVbfyZQU",
-
-            authDomain:
-                "student-progress-tracker-33064.firebaseapp.com",
-
-            projectId:
-                "student-progress-tracker-33064",
-
-            storageBucket:
-                "student-progress-tracker-33064.firebasestorage.app",
-
-            messagingSenderId:
-                "549690484739",
-
-            appId:
-                "1:549690484739:web:903b227ae9d9a238ae8636",
-
-            measurementId:
-                "G-30WQXGEKT8"
-        };
-
-
-        // ==========================================
-        // FIREBASE INITIALIZATION
-        // ==========================================
-
-        const app =
-            initializeApp(firebaseConfig);
-
-        const auth =
-            getAuth(app);
-
-
-        // ==========================================
-        // ELEMENTS
-        // ==========================================
-
-        const loginForm =
-            document.getElementById(
-                "loginForm"
-            );
-
-        const loginButton =
-            document.getElementById(
-                "loginButton"
-            );
-
-        const loginMessage =
-            document.getElementById(
-                "loginMessage"
-            );
-
-
-        // ==========================================
-        // LOGIN
-        // ==========================================
-
-        loginForm.addEventListener(
-            "submit",
-            async function(event) {
-
-                event.preventDefault();
-
-
-                const email =
-                    document
-                        .getElementById("email")
-                        .value
-                        .trim()
-                        .toLowerCase();
-
-
-                const password =
-                    document
-                        .getElementById("password")
-                        .value;
-
-
-                loginMessage.textContent = "";
-
-
-                try {
-
-                    loginButton.disabled = true;
-
-                    loginButton.textContent =
-                        "Logging in...";
-
-
-                    const result =
-                        await signInWithEmailAndPassword(
-                            auth,
-                            email,
-                            password
-                        );
-
-
-                    console.log(
-                        "Login successful"
-                    );
-
-                    console.log(
-                        "UID:",
-                        result.user.uid
-                    );
-
-
-                    loginMessage.textContent =
-                        "Login successful!";
-
-
-                    loginMessage.className =
-                        "message success";
-
-
-                    // ==================================
-                    // GO TO STUDENT DASHBOARD
-                    // ==================================
-
-                    window.location.href =
-                        "./homestdebt.html";
-
-                }
-
-
-                catch(error) {
-
-                    console.error(
-                        "Login error:",
-                        error
-                    );
-
-
-                    loginMessage.className =
-                        "message error";
-
-
-                    if (
-                        error.code ===
-                        "auth/invalid-credential"
-                    ) {
-
-                        loginMessage.textContent =
-                            "Incorrect Gmail or password.";
-
-                    }
-
-                    else if (
-                        error.code ===
-                        "auth/user-not-found"
-                    ) {
-
-                        loginMessage.textContent =
-                            "Student account not found.";
-
-                    }
-
-                    else if (
-                        error.code ===
-                        "auth/wrong-password"
-                    ) {
-
-                        loginMessage.textContent =
-                            "Incorrect password.";
-
-                    }
-
-                    else if (
-                        error.code ===
-                        "auth/invalid-email"
-                    ) {
-
-                        loginMessage.textContent =
-                            "Enter a valid Gmail address.";
-
-                    }
-
-                    else {
-
-                        loginMessage.textContent =
-                            error.message;
-
-                    }
-
-                }
-
-
-                finally {
-
-                    loginButton.disabled = false;
-
-                    loginButton.textContent =
-                        "Login";
-
-                }
-
-            }
-        );
-
-    </script>
 
 </body>
 
