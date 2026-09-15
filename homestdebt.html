@@ -1,346 +1,1112 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <title>StudentTrack - Student Dashboard</title>
 
-    <title>
-        StudentTrack - Dashboard
-    </title>
-
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
-        href="./homestdebt.css"
     >
 
-</head>
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        crossorigin=""
+    >
 
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="homestdebt.css">
+</head>
 
 <body>
 
-
-    <!-- ===================================== -->
-    <!-- SIDEBAR -->
-    <!-- ===================================== -->
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
 
     <aside class="sidebar">
 
-        <div class="logo">
+        <div class="sidebar-logo">
+            <div class="logo-icon">S</div>
 
-            <h2>
-                StudentTrack
-            </h2>
-
-            <p>
-                Student Portal
-            </p>
-
+            <div>
+                <h2>StudentTrack</h2>
+                <span>Student Portal</span>
+            </div>
         </div>
 
 
-        <nav>
+        <nav class="sidebar-nav">
 
-            <a
-                href="#"
-                class="active"
+            <button
+                class="nav-item active"
+                data-tab="overview"
             >
-                Dashboard
-            </a>
+                <span class="nav-icon">📊</span>
+                <span>Overview</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-tab="marks"
+            >
+                <span class="nav-icon">📝</span>
+                <span>My Marks</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-tab="analysis"
+            >
+                <span class="nav-icon">📈</span>
+                <span>Performance Analysis</span>
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-tab="bus"
+            >
+                <span class="nav-icon">🚌</span>
+                <span>Bus Routes</span>
+            </button>
 
         </nav>
 
 
-        <button
-            id="logoutButton"
-            class="logout-button"
-        >
-            Logout
-        </button>
+        <div class="sidebar-bottom">
+
+            <button
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                <span>🚪</span>
+                Logout
+            </button>
+
+        </div>
 
     </aside>
 
 
-
-    <!-- ===================================== -->
-    <!-- MAIN CONTENT -->
-    <!-- ===================================== -->
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
 
     <main class="main-content">
 
 
-        <!-- HEADER -->
+        <!-- TOP NAVBAR -->
 
-        <header class="header">
+        <header class="topbar">
 
-            <h1>
-                Student Dashboard
-            </h1>
+            <div class="mobile-brand">
+                <div class="logo-icon small">S</div>
+                <strong>StudentTrack</strong>
+            </div>
 
-            <p>
-                Welcome back,
-                <span id="studentName">
-                    Loading...
-                </span>
-            </p>
+
+            <div class="student-profile-mini">
+
+                <div
+                    id="profileAvatar"
+                    class="profile-avatar"
+                >
+                    S
+                </div>
+
+                <div class="profile-mini-text">
+
+                    <strong id="topStudentName">
+                        Student
+                    </strong>
+
+                    <span id="topStudentId">
+                        Student ID
+                    </span>
+
+                </div>
+
+            </div>
 
         </header>
 
 
+        <!-- =========================
+             PAGE CONTENT
+        ========================== -->
 
-        <!-- ===================================== -->
-        <!-- STUDENT PROFILE -->
-        <!-- ===================================== -->
-
-        <section class="student-card">
-
-
-            <div class="profile-item">
-
-                <span>
-                    Student Name
-                </span>
-
-                <h2 id="profileName">
-                    Loading...
-                </h2>
-
-            </div>
+        <section class="page-content">
 
 
-            <div class="profile-item">
+            <!-- =========================
+                 OVERVIEW TAB
+            ========================== -->
 
-                <span>
-                    Student ID
-                </span>
+            <section
+                id="overviewTab"
+                class="tab-content active"
+            >
 
-                <h2 id="profileId">
-                    Loading...
-                </h2>
+                <div class="welcome-section">
 
-            </div>
+                    <div>
+                        <span class="eyebrow">
+                            STUDENT DASHBOARD
+                        </span>
 
+                        <h1>
+                            Welcome back,
+                            <span id="welcomeStudentName">
+                                Student
+                            </span> 👋
+                        </h1>
 
-            <div class="profile-item">
-
-                <span>
-                    Email
-                </span>
-
-                <h2 id="profileEmail">
-                    Loading...
-                </h2>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- ===================================== -->
-        <!-- STATISTICS -->
-        <!-- ===================================== -->
-
-        <section class="stats">
-
-
-            <div class="stat-card">
-
-                <h3>
-                    Total Exams
-                </h3>
-
-                <p id="totalExams">
-                    0
-                </p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <h3>
-                    Subjects
-                </h3>
-
-                <p id="totalSubjects">
-                    0
-                </p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <h3>
-                    Average
-                </h3>
-
-                <p id="averagePercentage">
-                    0%
-                </p>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <h3>
-                    Total Marks
-                </h3>
-
-                <p id="totalMarks">
-                    0/0
-                </p>
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- ===================================== -->
-        <!-- MARKS -->
-        <!-- ===================================== -->
-
-        <section class="marks-section">
-
-
-            <div class="section-header">
-
-                <div>
-
-                    <h2>
-                        My Marks
-                    </h2>
-
-                    <p>
-                        Marks uploaded by your counsellor
-                    </p>
+                        <p>
+                            Track your academic performance,
+                            marks and campus transport.
+                        </p>
+                    </div>
 
                 </div>
 
 
-                <select
-                    id="semesterFilter"
+                <!-- Student Information -->
+
+                <div class="section-card student-info-card">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <span class="section-label">
+                                PROFILE
+                            </span>
+
+                            <h2>Student Information</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="student-info-grid">
+
+                        <div class="info-box">
+
+                            <span>Student Name</span>
+
+                            <strong id="studentName">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <span>Student ID</span>
+
+                            <strong id="studentId">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-box">
+
+                            <span>Email</span>
+
+                            <strong id="studentEmail">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Statistics -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+                            📝
+                        </div>
+
+                        <div>
+                            <span>Total Exams</span>
+                            <strong id="totalExams">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+                            📚
+                        </div>
+
+                        <div>
+                            <span>Subjects</span>
+                            <strong id="totalSubjects">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon purple">
+                            🎯
+                        </div>
+
+                        <div>
+                            <span>Average</span>
+                            <strong id="overallAverage">0%</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon orange">
+                            🏆
+                        </div>
+
+                        <div>
+                            <span>Best Subject</span>
+                            <strong id="bestSubject">-</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Overview Marks -->
+
+                <div class="section-card">
+
+                    <div class="section-heading">
+
+                        <div>
+                            <span class="section-label">
+                                ACADEMICS
+                            </span>
+
+                            <h2>Subject Performance</h2>
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Average</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="overviewTableBody">
+
+                                <tr>
+                                    <td colspan="3" class="empty-cell">
+                                        Loading marks...
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 MY MARKS TAB
+            ========================== -->
+
+            <section
+                id="marksTab"
+                class="tab-content"
+            >
+
+                <div class="page-header">
+
+                    <div>
+                        <span class="eyebrow">
+                            ACADEMICS
+                        </span>
+
+                        <h1>My Marks</h1>
+
+                        <p>
+                            View your marks for every model examination.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- Filters -->
+
+                <div class="filter-card">
+
+                    <div class="filter-group">
+
+                        <label for="semesterFilter">
+                            Semester
+                        </label>
+
+                        <select id="semesterFilter">
+
+                            <option value="all">
+                                All Semesters
+                            </option>
+
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-group">
+
+                        <label for="examFilter">
+                            Examination
+                        </label>
+
+                        <select id="examFilter">
+
+                            <option value="all">
+                                All Model Exams
+                            </option>
+
+                            <option value="1">Model Exam 1</option>
+                            <option value="2">Model Exam 2</option>
+                            <option value="3">Model Exam 3</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Marks Table -->
+
+                <div class="section-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Semester</th>
+                                    <th>Exam</th>
+                                    <th>Subject</th>
+                                    <th>Marks</th>
+                                    <th>Percentage</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="marksTableBody">
+
+                                <tr>
+                                    <td colspan="6" class="empty-cell">
+                                        Loading marks...
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 PERFORMANCE ANALYSIS
+            ========================== -->
+
+            <section
+                id="analysisTab"
+                class="tab-content"
+            >
+
+                <div class="page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            PERFORMANCE
+                        </span>
+
+                        <h1>Performance Analysis</h1>
+
+                        <p>
+                            Analyze your model examination performance
+                            and estimate your semester score.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Prediction Settings -->
+
+                <div class="analysis-settings">
+
+                    <div class="analysis-setting">
+
+                        <label for="analysisSemester">
+                            Select Semester
+                        </label>
+
+                        <select id="analysisSemester">
+
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="analysis-setting">
+
+                        <label for="semesterMaxMarks">
+                            Semester Maximum Marks
+                        </label>
+
+                        <input
+                            id="semesterMaxMarks"
+                            type="number"
+                            value="100"
+                            min="1"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Prediction Summary -->
+
+                <div class="prediction-grid">
+
+                    <div class="prediction-card main-prediction">
+
+                        <span>
+                            PREDICTED SEMESTER SCORE
+                        </span>
+
+                        <strong id="predictedScore">
+                            0
+                        </strong>
+
+                        <small id="predictedScoreText">
+                            / 100
+                        </small>
+
+                        <div class="prediction-progress">
+
+                            <div
+                                id="predictionProgress"
+                                class="prediction-progress-bar"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="prediction-card">
+
+                        <span>
+                            MODELS USED
+                        </span>
+
+                        <strong id="modelsUsed">
+                            0 / 3
+                        </strong>
+
+                        <small>
+                            Model examinations available
+                        </small>
+
+                    </div>
+
+
+                    <div class="prediction-card">
+
+                        <span>
+                            STRONGEST SUBJECT
+                        </span>
+
+                        <strong id="strongestSubject">
+                            -
+                        </strong>
+
+                        <small id="strongestSubjectScore">
+                            -
+                        </small>
+
+                    </div>
+
+
+                    <div class="prediction-card priority">
+
+                        <span>
+                            NEEDS MOST ATTENTION
+                        </span>
+
+                        <strong id="weakestSubject">
+                            -
+                        </strong>
+
+                        <small id="weakestSubjectScore">
+                            -
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Prediction Method -->
+
+                <div class="section-card prediction-method">
+
+                    <div>
+
+                        <span class="section-label">
+                            PREDICTION METHOD
+                        </span>
+
+                        <h2>Weighted Model Analysis</h2>
+
+                        <p>
+                            Model 1 contributes 20%, Model 2 contributes
+                            30%, and Model 3 contributes 50%.
+                            If a model is missing, the available weights
+                            are automatically normalized.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Subject Prediction -->
+
+                <div class="section-card">
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                SUBJECT ANALYSIS
+                            </span>
+
+                            <h2>Subject-wise Prediction</h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Model 1</th>
+                                    <th>Model 2</th>
+                                    <th>Model 3</th>
+                                    <th>Prediction</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="predictionTableBody">
+
+                                <tr>
+                                    <td colspan="6" class="empty-cell">
+                                        Select a semester to analyze.
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Trend -->
+
+                <div class="analysis-two-column">
+
+                    <div class="section-card">
+
+                        <span class="section-label">
+                            TREND
+                        </span>
+
+                        <h2>Performance Trend</h2>
+
+                        <div
+                            id="trendBox"
+                            class="trend-box"
+                        >
+                            Not enough data
+                        </div>
+
+                    </div>
+
+
+                    <div class="section-card">
+
+                        <span class="section-label">
+                            PRIORITY AREAS
+                        </span>
+
+                        <h2>Subjects To Focus On</h2>
+
+                        <div id="priorityAreas">
+                            <p class="muted">
+                                No priority areas yet.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Recommendations -->
+
+                <div class="section-card">
+
+                    <span class="section-label">
+                        RECOMMENDATIONS
+                    </span>
+
+                    <h2>What You Should Focus On</h2>
+
+                    <div id="recommendations">
+
+                        <p class="muted">
+                            Complete more model examinations
+                            to receive recommendations.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Overall Insight -->
+
+                <div
+                    id="overallInsight"
+                    class="overall-insight"
+                >
+                    Performance analysis will appear here.
+                </div>
+
+            </section>
+
+
+
+            <!-- =========================
+                 BUS ROUTES TAB
+            ========================== -->
+
+            <section
+                id="busTab"
+                class="tab-content"
+            >
+
+                <div class="page-header bus-page-header">
+
+                    <div>
+
+                        <span class="eyebrow">
+                            CAMPUS TRANSPORT
+                        </span>
+
+                        <h1>Bus Routes</h1>
+
+                        <p>
+                            Find buses serving your stop and track
+                            their live location.
+                        </p>
+
+                    </div>
+
+                    <div
+                        id="busLiveIndicator"
+                        class="live-indicator"
+                    >
+                        <span class="live-dot"></span>
+                        Live Tracking
+                    </div>
+
+                </div>
+
+
+                <!-- Direction Selection -->
+
+                <div class="bus-direction-card">
+
+                    <div class="direction-title">
+
+                        <span class="section-label">
+                            TRAVEL DIRECTION
+                        </span>
+
+                        <h2>Where are you travelling?</h2>
+
+                    </div>
+
+
+                    <div class="direction-buttons">
+
+                        <button
+                            id="morningBtn"
+                            class="direction-btn active"
+                            data-direction="morning"
+                        >
+                            <span class="direction-icon">
+                                🌅
+                            </span>
+
+                            <span>
+                                <strong>Morning</strong>
+                                <small>
+                                    My Stop → College
+                                </small>
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            id="eveningBtn"
+                            class="direction-btn"
+                            data-direction="evening"
+                        >
+                            <span class="direction-icon">
+                                🌆
+                            </span>
+
+                            <span>
+                                <strong>Evening</strong>
+                                <small>
+                                    College → My Drop-off
+                                </small>
+                            </span>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Stop Selection -->
+
+                <div class="section-card bus-selection-card">
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <span class="section-label">
+                                YOUR STOP
+                            </span>
+
+                            <h2>Select Your Stopping</h2>
+
+                            <p class="section-description">
+                                Select the bus stop you use for this journey.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="bus-stop-selector">
+
+                        <label for="busStopSelect">
+                            Select stopping
+                        </label>
+
+                        <select id="busStopSelect">
+
+                            <option value="">
+                                Loading stops...
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div
+                        id="busSelectionMessage"
+                        class="bus-selection-message"
+                    >
+                        Select a stopping to find available buses.
+                    </div>
+
+                </div>
+
+
+                <!-- Bus List -->
+
+                <div class="bus-layout">
+
+
+                    <!-- Available Buses -->
+
+                    <div class="section-card available-buses-card">
+
+                        <div class="section-heading">
+
+                            <div>
+
+                                <span class="section-label">
+                                    AVAILABLE BUSES
+                                </span>
+
+                                <h2>Buses for your route</h2>
+
+                            </div>
+
+                            <span
+                                id="busCount"
+                                class="count-badge"
+                            >
+                                0 buses
+                            </span>
+
+                        </div>
+
+
+                        <div id="availableBusList">
+
+                            <div class="bus-empty-state">
+
+                                <div class="empty-bus-icon">
+                                    🚌
+                                </div>
+
+                                <h3>
+                                    Select your stop
+                                </h3>
+
+                                <p>
+                                    Available buses will appear here.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Live Map -->
+
+                    <div class="section-card map-card">
+
+                        <div class="section-heading map-heading">
+
+                            <div>
+
+                                <span class="section-label">
+                                    LIVE MAP
+                                </span>
+
+                                <h2>Bus Location</h2>
+
+                            </div>
+
+                            <span
+                                id="mapBusStatus"
+                                class="map-status"
+                            >
+                                Waiting
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            id="busMap"
+                            class="bus-map"
+                        ></div>
+
+
+                        <div class="map-footer">
+
+                            <span>
+                                🚌 Bus number
+                            </span>
+
+                            <span>
+                                🔴 Live location
+                            </span>
+
+                            <span id="lastMapUpdate">
+                                No updates yet
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Selected Bus -->
+
+                <div
+                    id="selectedBusInfo"
+                    class="selected-bus-info hidden"
                 >
 
-                    <option value="all">
-                        All Semesters
-                    </option>
+                    <div class="selected-bus-icon">
+                        🚌
+                    </div>
 
-                    <option value="1">
-                        Semester 1
-                    </option>
+                    <div>
 
-                    <option value="2">
-                        Semester 2
-                    </option>
+                        <span>
+                            SELECTED BUS
+                        </span>
 
-                    <option value="3">
-                        Semester 3
-                    </option>
+                        <strong id="selectedBusNumber">
+                            -
+                        </strong>
 
-                    <option value="4">
-                        Semester 4
-                    </option>
+                        <p id="selectedBusRoute">
+                            -
+                        </p>
 
-                    <option value="5">
-                        Semester 5
-                    </option>
+                    </div>
 
-                    <option value="6">
-                        Semester 6
-                    </option>
-
-                    <option value="7">
-                        Semester 7
-                    </option>
-
-                    <option value="8">
-                        Semester 8
-                    </option>
-
-                </select>
-
-            </div>
+                </div>
 
 
+                <!-- Transport Note -->
 
-            <div class="table-container">
+                <div class="bus-info-note">
 
-                <table>
+                    <div class="note-icon">
+                        ℹ️
+                    </div>
 
-                    <thead>
+                    <div>
 
-                        <tr>
+                        <strong>
+                            Live tracking information
+                        </strong>
 
-                            <th>
-                                Semester
-                            </th>
+                        <p>
+                            Bus locations are updated from the driver's
+                            mobile GPS. The location may take a few seconds
+                            to refresh depending on the driver's internet
+                            connection and GPS signal.
+                        </p>
 
-                            <th>
-                                Exam
-                            </th>
+                    </div>
 
-                            <th>
-                                Subject
-                            </th>
+                </div>
 
-                            <th>
-                                Marks
-                            </th>
-
-                            <th>
-                                Percentage
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="marksTableBody">
-
-                        <tr>
-
-                            <td
-                                colspan="5"
-                                class="loading"
-                            >
-                                Loading marks...
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
+            </section>
 
         </section>
-
 
     </main>
 
 
-    <!-- ===================================== -->
-    <!-- JAVASCRIPT -->
-    <!-- ===================================== -->
+    <!-- Leaflet JS -->
 
     <script
-        type="module"
-        src="./homestdebt.js"
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        crossorigin=""
     ></script>
 
 
-</body>
+    <!-- Student Dashboard JS -->
 
+    <script
+        type="module"
+        src="homestdebt.js"
+    ></script>
+
+</body>
 </html>
