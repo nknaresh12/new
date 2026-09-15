@@ -1,0 +1,769 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f5f6fb;
+
+    color: #111827;
+
+    min-height: 100vh;
+}
+
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+
+    height: 80px;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 55px;
+
+    background: white;
+
+    border-bottom: 1px solid #e8eaf0;
+
+}
+
+
+/* LOGO */
+
+.nav-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+    color: #171729;
+}
+
+
+.logo-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 12px;
+
+    background: #6c5ce7;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+}
+
+
+/* ADMIN BUTTON */
+
+.admin-button {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    background: #f2f1ff;
+
+    color: #5146d9;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    border: 1px solid #e3e0ff;
+
+    transition: 0.2s;
+
+}
+
+
+.admin-button:hover {
+
+    background: #e7e5ff;
+
+    transform: translateY(-1px);
+
+}
+
+
+.admin-icon {
+
+    font-size: 15px;
+
+}
+
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.main-container {
+
+    max-width: 1180px;
+
+    min-height: calc(100vh - 80px);
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    background: white;
+
+    overflow: hidden;
+
+}
+
+
+
+/* =========================================
+   HERO SECTION
+========================================= */
+
+.hero-section {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #6c5ce7,
+            #5146d9
+        );
+
+    color: white;
+
+    padding: 80px 65px;
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 510px;
+
+}
+
+
+/* BADGE */
+
+.small-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 15px;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,0.14);
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    margin-bottom: 32px;
+
+}
+
+
+.small-badge span {
+
+    font-size: 10px;
+
+}
+
+
+
+/* HERO TITLE */
+
+.hero-content h1 {
+
+    font-size: 54px;
+
+    line-height: 1.08;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 27px;
+
+}
+
+
+.hero-content h1 span {
+
+    opacity: 0.55;
+
+}
+
+
+
+/* DESCRIPTION */
+
+.hero-description {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: rgba(255,255,255,0.82);
+
+    margin-bottom: 42px;
+
+}
+
+
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.features {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 19px;
+
+}
+
+
+.feature-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    font-size: 15px;
+
+}
+
+
+.feature-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 9px;
+
+    background: rgba(255,255,255,0.15);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 15px;
+
+}
+
+
+
+/* =========================================
+   DECORATIVE CIRCLES
+========================================= */
+
+.circle {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.06);
+
+}
+
+
+.circle-one {
+
+    width: 320px;
+
+    height: 320px;
+
+    top: -130px;
+
+    right: -100px;
+
+}
+
+
+.circle-two {
+
+    width: 230px;
+
+    height: 230px;
+
+    bottom: -100px;
+
+    left: -80px;
+
+}
+
+
+
+/* =========================================
+   PORTAL SECTION
+========================================= */
+
+.portal-section {
+
+    background: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 60px;
+
+}
+
+
+.portal-box {
+
+    width: 100%;
+
+    max-width: 480px;
+
+}
+
+
+
+/* WELCOME ICON */
+
+.welcome-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 15px;
+
+    background: #f0efff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.portal-box h2 {
+
+    font-size: 31px;
+
+    margin-bottom: 10px;
+
+    color: #111827;
+
+}
+
+
+.welcome-text {
+
+    color: #718096;
+
+    font-size: 15px;
+
+    margin-bottom: 30px;
+
+    line-height: 1.6;
+
+}
+
+
+
+/* =========================================
+   PORTAL CARDS
+========================================= */
+
+.portal-card {
+
+    width: 100%;
+
+    min-height: 108px;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    text-decoration: none;
+
+    color: inherit;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 17px;
+
+    margin-bottom: 16px;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
+
+}
+
+
+.portal-card:hover {
+
+    transform: translateY(-3px);
+
+    border-color: #cfcaff;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.08);
+
+}
+
+
+
+/* PORTAL ICON */
+
+.portal-card-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    min-width: 55px;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+}
+
+
+.student-icon {
+
+    background: #f0efff;
+
+}
+
+
+.counsellor-icon {
+
+    background: #f2f0ff;
+
+}
+
+
+
+/* CARD CONTENT */
+
+.portal-card-content {
+
+    flex: 1;
+
+}
+
+
+.portal-card-content h3 {
+
+    font-size: 16px;
+
+    margin-bottom: 7px;
+
+    color: #111827;
+
+}
+
+
+.portal-card-content p {
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #718096;
+
+}
+
+
+
+/* ARROW */
+
+.arrow {
+
+    font-size: 24px;
+
+    color: #a0aec0;
+
+    transition: 0.2s;
+
+}
+
+
+.portal-card:hover .arrow {
+
+    color: #5146d9;
+
+    transform: translateX(4px);
+
+}
+
+
+
+/* =========================================
+   INFO BOX
+========================================= */
+
+.portal-info {
+
+    margin-top: 22px;
+
+    padding: 14px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    border-radius: 11px;
+
+    background: #f8f9fc;
+
+    border: 1px solid #e8eaf0;
+
+    color: #718096;
+
+    font-size: 12px;
+
+}
+
+
+.portal-info span {
+
+    font-size: 15px;
+
+}
+
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer-text {
+
+    text-align: center;
+
+    margin-top: 30px;
+
+    font-size: 11px;
+
+    color: #a0aec0;
+
+}
+
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 950px) {
+
+    .navbar {
+
+        padding: 0 25px;
+
+    }
+
+
+    .main-container {
+
+        grid-template-columns: 1fr;
+
+        margin: 0;
+
+    }
+
+
+    .hero-section {
+
+        padding: 60px 40px;
+
+    }
+
+
+    .portal-section {
+
+        padding: 60px 40px;
+
+    }
+
+
+    .hero-content h1 {
+
+        font-size: 45px;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+
+        height: 70px;
+
+        padding: 0 18px;
+
+    }
+
+
+    .nav-logo {
+
+        font-size: 18px;
+
+    }
+
+
+    .logo-icon {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+
+    .admin-button {
+
+        padding: 8px 12px;
+
+    }
+
+
+    .hero-section {
+
+        padding: 50px 25px;
+
+    }
+
+
+    .portal-section {
+
+        padding: 45px 20px;
+
+    }
+
+
+    .hero-content h1 {
+
+        font-size: 38px;
+
+    }
+
+
+    .hero-description {
+
+        font-size: 15px;
+
+    }
+
+
+    .portal-box h2 {
+
+        font-size: 27px;
+
+    }
+
+
+    .portal-card {
+
+        padding: 16px;
+
+    }
+
+}
