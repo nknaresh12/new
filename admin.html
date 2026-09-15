@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Control Panel | StudentTrack</title>
+
+    <link rel="stylesheet" href="./admin.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         ADMIN LOGIN
+    ========================================== -->
+
+    <div id="loginPage" class="login-page">
+
+        <div class="login-card">
+
+            <div class="admin-logo">
+                👑
+            </div>
+
+            <h1>Admin Login</h1>
+
+            <p>
+                StudentTrack Administrator
+            </p>
+
+
+            <form id="adminLoginForm">
+
+                <label>
+                    Admin Gmail
+                </label>
+
+                <input
+                    type="email"
+                    id="adminEmail"
+                    placeholder="admin@gmail.com"
+                    required
+                >
+
+
+                <label>
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    placeholder="Enter password"
+                    required
+                >
+
+
+                <div id="loginMessage"></div>
+
+
+                <button type="submit">
+                    Login as Admin
+                </button>
+
+            </form>
+
+
+            <a href="./index.html">
+                ← Back to Portal
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         ADMIN DASHBOARD
+    ========================================== -->
+
+    <div id="dashboardPage" class="dashboard-page hidden">
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="sidebar-brand">
+
+                <div class="brand-icon">
+                    S
+                </div>
+
+                <div>
+                    <h2>StudentTrack</h2>
+                    <span>Administration</span>
+                </div>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="profile-icon">
+                    👑
+                </div>
+
+                <div>
+                    <strong>Administrator</strong>
+                    <small>Supreme Access</small>
+                </div>
+
+            </div>
+
+
+            <div class="sidebar-info">
+
+                <p>
+                    You control access for all counsellors.
+                </p>
+
+            </div>
+
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+            >
+                ↪ Logout
+            </button>
+
+        </aside>
+
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+
+            <!-- HEADER -->
+
+            <header class="top-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        ADMINISTRATION
+                    </p>
+
+                    <h1>
+                        Access Control
+                    </h1>
+
+                    <p>
+                        Decide who can access the Counsellor Portal.
+                    </p>
+
+                </div>
+
+                <div class="admin-badge">
+                    👑 Admin
+                </div>
+
+            </header>
+
+
+
+            <!-- STATS -->
+
+            <section class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        👥
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Counsellors
+                        </span>
+
+                        <strong id="totalCounsellors">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Active Access
+                        </span>
+
+                        <strong id="activeCounsellors">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        ⏳
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Pending
+                        </span>
+
+                        <strong id="pendingCounsellors">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ADD COUNSELLOR -->
+
+            <section class="panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Give Counsellor Access
+                        </h2>
+
+                        <p>
+                            Create a Gmail account and decide whether
+                            the counsellor can access the portal.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form id="counsellorForm" class="counsellor-form">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Counsellor Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="counsellorName"
+                            placeholder="Enter counsellor name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Counsellor Gmail
+                        </label>
+
+                        <input
+                            type="email"
+                            id="counsellorEmail"
+                            placeholder="counsellor@gmail.com"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Temporary Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="counsellorPassword"
+                            placeholder="Minimum 6 characters"
+                            minlength="6"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-action">
+
+                        <button
+                            type="submit"
+                            id="addCounsellorButton"
+                        >
+                            + Add Counsellor
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+
+                <div id="formMessage"></div>
+
+            </section>
+
+
+
+            <!-- COUNSELLOR LIST -->
+
+            <section class="panel">
+
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Counsellor Access
+                        </h2>
+
+                        <p>
+                            Manage who is allowed to enter the
+                            Counsellor Portal.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Counsellor
+                                </th>
+
+                                <th>
+                                    Gmail
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th>
+                                    Access
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="counsellorTable">
+
+                            <tr>
+
+                                <td
+                                    colspan="4"
+                                    class="empty-row"
+                                >
+                                    Loading counsellors...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+
+    <script
+        type="module"
+        src="./admin.js"
+    ></script>
+
+
+</body>
+
+</html>
