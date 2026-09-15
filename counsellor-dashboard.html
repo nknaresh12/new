@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Counsellor Dashboard - StudentTrack</title>
+
+    <link rel="stylesheet" href="counsellor-dashboard.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">S</div>
+            <div>
+                <h2>StudentTrack</h2>
+                <span>Counsellor Portal</span>
+            </div>
+        </div>
+
+        <nav>
+            <button class="nav-item active" onclick="showSection('dashboard')">
+                <span>📊</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item" onclick="showSection('students')">
+                <span>👨‍🎓</span>
+                Students
+            </button>
+
+            <button class="nav-item" onclick="showSection('marks')">
+                <span>📝</span>
+                Upload Marks
+            </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button id="logoutButton" class="logout-button">
+                🚪 Logout
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <h1 id="pageTitle">Counsellor Dashboard</h1>
+                <p>Manage student progress and academic marks</p>
+            </div>
+
+            <div class="user-info">
+                <div class="user-avatar">C</div>
+
+                <div>
+                    <strong id="counsellorName">Counsellor</strong>
+                    <small id="counsellorEmail">Loading...</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD SECTION -->
+        <section id="dashboardSection" class="section active-section">
+
+            <div class="welcome-card">
+
+                <div>
+                    <span class="welcome-label">WELCOME BACK</span>
+
+                    <h2>
+                        Hello, <span id="welcomeName">Counsellor</span> 👋
+                    </h2>
+
+                    <p>
+                        Monitor your students' academic performance
+                        and keep their records updated.
+                    </p>
+                </div>
+
+                <div class="welcome-icon">
+                    🎓
+                </div>
+
+            </div>
+
+
+            <!-- STAT CARDS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <div class="stat-icon students-icon">👨‍🎓</div>
+
+                    <div>
+                        <span>Total Students</span>
+                        <h3 id="totalStudents">0</h3>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon marks-icon">📝</div>
+
+                    <div>
+                        <span>Total Mark Records</span>
+                        <h3 id="totalMarks">0</h3>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon semester-icon">📚</div>
+
+                    <div>
+                        <span>Semesters</span>
+                        <h3>8</h3>
+                    </div>
+                </div>
+
+
+                <div class="stat-card">
+                    <div class="stat-icon exam-icon">📋</div>
+
+                    <div>
+                        <span>Model Exams</span>
+                        <h3>3</h3>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+            <div class="section-header">
+                <div>
+                    <h2>Quick Actions</h2>
+                    <p>Frequently used counsellor actions</p>
+                </div>
+            </div>
+
+
+            <div class="quick-actions">
+
+                <button class="action-card" onclick="showSection('students')">
+
+                    <div class="action-icon">👨‍🎓</div>
+
+                    <div>
+                        <h3>View Students</h3>
+                        <p>View all registered students</p>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+
+                <button class="action-card" onclick="showSection('marks')">
+
+                    <div class="action-icon">📝</div>
+
+                    <div>
+                        <h3>Upload Marks</h3>
+                        <p>Add marks for a student</p>
+                    </div>
+
+                    <span class="arrow">→</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- RECENT MARKS -->
+            <div class="section-header recent-header">
+
+                <div>
+                    <h2>Recent Mark Uploads</h2>
+                    <p>Latest academic records</p>
+                </div>
+
+            </div>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Semester</th>
+                            <th>Exam</th>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recentMarksTable">
+
+                        <tr>
+                            <td colspan="5" class="empty">
+                                Loading records...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- STUDENTS SECTION -->
+        <section id="studentsSection" class="section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Students</h2>
+                    <p>View students under your counselling</p>
+                </div>
+
+            </div>
+
+
+            <div id="studentsContainer" class="students-grid">
+
+                <div class="loading-card">
+                    Loading students...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MARKS SECTION -->
+        <section id="marksSection" class="section">
+
+            <div class="section-header">
+
+                <div>
+                    <h2>Upload Marks</h2>
+                    <p>Add academic marks for a student</p>
+                </div>
+
+            </div>
+
+
+            <div class="form-card">
+
+                <form id="marksForm">
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>Student</label>
+
+                            <select id="studentSelect" required>
+                                <option value="">Select Student</option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Semester</label>
+
+                            <select id="semesterSelect" required>
+
+                                <option value="">Select Semester</option>
+
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>Model Exam</label>
+
+                            <select id="examSelect" required>
+
+                                <option value="">Select Exam</option>
+
+                                <option value="Model Exam 1">
+                                    Model Exam 1
+                                </option>
+
+                                <option value="Model Exam 2">
+                                    Model Exam 2
+                                </option>
+
+                                <option value="Model Exam 3">
+                                    Model Exam 3
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Subject</label>
+
+                            <select id="subjectSelect" required>
+
+                                <option value="">Select Subject</option>
+
+                                <option value="Mathematics">
+                                    Mathematics
+                                </option>
+
+                                <option value="Data Structures">
+                                    Data Structures
+                                </option>
+
+                                <option value="Python">
+                                    Python
+                                </option>
+
+                                <option value="Java">
+                                    Java
+                                </option>
+
+                                <option value="Database Management Systems">
+                                    Database Management Systems
+                                </option>
+
+                                <option value="Computer Networks">
+                                    Computer Networks
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>Marks Obtained</label>
+
+                            <input
+                                type="number"
+                                id="marksInput"
+                                min="0"
+                                max="100"
+                                placeholder="Enter marks"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Maximum Marks</label>
+
+                            <input
+                                type="number"
+                                id="maxMarksInput"
+                                value="100"
+                                min="1"
+                                placeholder="100"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="uploadButton"
+                        class="primary-button"
+                    >
+                        Upload Marks
+                    </button>
+
+
+                    <p id="marksMessage" class="message"></p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- STUDENT DETAILS MODAL -->
+    <div id="studentModal" class="modal">
+
+        <div class="modal-content">
+
+            <button
+                class="close-button"
+                onclick="closeStudentModal()"
+            >
+                ×
+            </button>
+
+            <div class="modal-header">
+
+                <div class="modal-avatar">
+                    👨‍🎓
+                </div>
+
+                <div>
+                    <h2 id="modalStudentName">Student</h2>
+                    <p id="modalStudentEmail">email</p>
+                </div>
+
+            </div>
+
+
+            <div class="student-details">
+
+                <div class="detail-box">
+                    <span>Student ID</span>
+                    <strong id="modalStudentId">-</strong>
+                </div>
+
+                <div class="detail-box">
+                    <span>Total Marks</span>
+                    <strong id="modalTotalMarks">0</strong>
+                </div>
+
+            </div>
+
+
+            <h3 class="modal-title">Marks</h3>
+
+            <div class="modal-table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Semester</th>
+                            <th>Exam</th>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                            <th>%</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="studentMarksTable">
+
+                        <tr>
+                            <td colspan="5" class="empty">
+                                Loading...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script type="module" src="counsellor-dashboard.js"></script>
+
+</body>
+</html>
