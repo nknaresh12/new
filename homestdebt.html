@@ -2,755 +2,1207 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>StudentTrack - Student Portal</title>
+    <title>StudentTrack - Student Dashboard</title>
 
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Leaflet Map -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        crossorigin=""
+    >
+
+    <!-- Dashboard CSS -->
     <link rel="stylesheet" href="homestdebt.css">
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
-
-    <header class="topbar">
-
-        <div class="topbar-left">
-            <div class="logo-small">S</div>
-
-            <div>
-                <h2>StudentTrack</h2>
-                <p>Student Portal</p>
-            </div>
-        </div>
-
-        <div class="student-profile">
-
-            <div class="profile-avatar" id="profileAvatar">
-                S
-            </div>
-
-            <div>
-                <strong id="studentNameTop">Student</strong>
-                <span id="studentIdTop">Student ID</span>
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <!-- ================= SIDEBAR ================= -->
-
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
     <aside class="sidebar">
 
-        <div class="sidebar-brand">
-
-            <div class="brand-logo">
-                S
-            </div>
-
+        <div class="sidebar-logo">
+            <div class="logo-icon">S</div>
             <div>
                 <h2>StudentTrack</h2>
-                <p>Student Portal</p>
+                <span>Student Portal</span>
             </div>
-
         </div>
-
 
         <nav class="sidebar-nav">
 
-            <button
-                class="nav-item active"
-                data-tab="overview"
-                id="overviewButton"
-            >
-                📊
+            <button class="nav-item active" data-tab="overview">
+                <span class="nav-icon">⌂</span>
                 <span>Overview</span>
             </button>
 
-
-            <button
-                class="nav-item"
-                data-tab="marks"
-                id="marksButton"
-            >
-                📝
+            <button class="nav-item" data-tab="marks">
+                <span class="nav-icon">📊</span>
                 <span>My Marks</span>
             </button>
 
-
-            <button
-                class="nav-item"
-                data-tab="analysis"
-                id="analysisButton"
-            >
-                📈
+            <button class="nav-item" data-tab="performance">
+                <span class="nav-icon">📈</span>
                 <span>Performance Analysis</span>
             </button>
 
+            <button class="nav-item" data-tab="attendance">
+                <span class="nav-icon">📅</span>
+                <span>Attendance</span>
+            </button>
 
-            <button
-                class="nav-item"
-                data-tab="bus"
-                id="busButton"
-                onclick="window.location.href='bus-routes.html'"
-            >
-                🚌
+            <button class="nav-item" data-tab="leave">
+                <span class="nav-icon">📝</span>
+                <span>Leave Form</span>
+            </button>
+
+            <button class="nav-item" data-tab="bus">
+                <span class="nav-icon">🚌</span>
                 <span>Bus Routes</span>
+            </button>
+
+            <button class="nav-item" data-tab="profile">
+                <span class="nav-icon">👤</span>
+                <span>My Profile</span>
             </button>
 
         </nav>
 
-
-        <button class="logout-btn" id="logoutBtn">
-            🚪
-            <span>Logout</span>
-        </button>
+        <div class="sidebar-bottom">
+            <button id="themeToggle" class="theme-toggle">
+                <span class="toggle-icon">🌙</span>
+                <span>Dark Mode</span>
+            </button>
+            <button id="logoutBtn" class="logout-btn">
+                <span>↪</span>
+                Logout
+            </button>
+        </div>
 
     </aside>
 
 
-
-    <!-- ================= MAIN CONTENT ================= -->
-
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
     <main class="main-content">
 
+        <!-- TOP NAVBAR -->
+        <header class="topbar">
 
-        <!-- ================= OVERVIEW TAB ================= -->
-
-        <section
-            class="tab-content active"
-            id="overviewTab"
-        >
-
-            <div class="page-header">
-
-                <span class="page-label">
-                    STUDENT PORTAL
-                </span>
-
-                <h1>Welcome back, <span id="welcomeName">Student</span>!</h1>
-
-                <p>
-                    Track your academic performance and monitor your progress.
-                </p>
-
+            <div>
+                <h1 id="pageTitle">Dashboard</h1>
+                <p id="pageSubtitle">Welcome back to StudentTrack</p>
             </div>
 
+            <div class="topbar-right">
 
-            <!-- Statistics -->
+            <div class="notification-area">
+                <button id="notifBell" class="notif-bell">
+                    🔔
+                    <span id="notifCount" class="notif-count" style="display:none;">0</span>
+                </button>
+                <div id="notifDropdown" class="notif-dropdown" style="display:none;">
+                    <div class="notif-header">
+                        <strong>Notifications</strong>
+                        <button id="notifClearAll" class="notif-clear">Clear all</button>
+                    </div>
+                    <div id="notifList" class="notif-list">
+                        <div class="notif-empty">No notifications</div>
+                    </div>
+                </div>
+            </div>
 
-            <div class="stats-grid">
+            <div class="student-mini-profile">
 
-                <div class="stat-card">
-                    <span>Total Subjects</span>
-                    <strong id="totalSubjects">0</strong>
+                <div class="student-avatar" id="studentAvatar">
+                    S
                 </div>
 
-                <div class="stat-card">
-                    <span>Average Marks</span>
-                    <strong id="averageMarks">0%</strong>
-                </div>
-
-                <div class="stat-card">
-                    <span>Model Exams</span>
-                    <strong id="totalExams">0</strong>
-                </div>
-
-                <div class="stat-card">
-                    <span>Current Semester</span>
-                    <strong id="currentSemester">1</strong>
+                <div class="student-mini-info">
+                    <strong id="topStudentName">Student</strong>
+                    <span id="topStudentId">Loading...</span>
                 </div>
 
             </div>
 
+            </div>
 
-            <!-- Student Information -->
+        </header>
 
-            <div class="content-card">
 
-                <div class="card-header">
+        <!-- =========================
+             TAB CONTENT
+        ========================== -->
+        <div class="content-wrapper">
 
+
+            <!-- =====================================================
+                 OVERVIEW
+            ====================================================== -->
+            <section id="overviewTab" class="tab-content active">
+
+                <div class="welcome-card">
                     <div>
-                        <span class="card-label">PROFILE</span>
-                        <h2>Student Information</h2>
+                        <span class="welcome-label">STUDENT DASHBOARD</span>
+                        <h2>Welcome, <span id="welcomeStudentName">Student</span></h2>
+                        <p>Track your academic performance, attendance, leave requests and college bus routes.</p>
+                    </div>
+                    <div class="welcome-decoration">📚</div>
+                </div>
+
+                <!-- QUICK STATS -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">📊</div>
+                        <div>
+                            <span>Total Marks Records</span>
+                            <strong id="totalMarksCount">0</strong>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">📅</div>
+                        <div>
+                            <span>Attendance</span>
+                            <strong id="overviewAttendance">--</strong>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">📝</div>
+                        <div>
+                            <span>Leave Used</span>
+                            <strong id="overviewLeave">0 / 4</strong>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon purple">🎓</div>
+                        <div>
+                            <span>Current Semester</span>
+                            <strong id="overviewSemester">--</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUICK LINKS -->
+                <div class="quick-links-grid">
+                    <button class="quick-link-card" data-goto="marks">
+                        <div class="ql-icon">📊</div>
+                        <div class="ql-text">
+                            <strong>My Marks</strong>
+                            <span>View exam results</span>
+                        </div>
+                        <span class="ql-arrow">&rarr;</span>
+                    </button>
+                    <button class="quick-link-card" data-goto="performance">
+                        <div class="ql-icon">📈</div>
+                        <div class="ql-text">
+                            <strong>CGPA Predictor</strong>
+                            <span>AI-powered analysis</span>
+                        </div>
+                        <span class="ql-arrow">&rarr;</span>
+                    </button>
+                    <button class="quick-link-card" data-goto="attendance">
+                        <div class="ql-icon">📅</div>
+                        <div class="ql-text">
+                            <strong>Attendance</strong>
+                            <span>Calendar & stats</span>
+                        </div>
+                        <span class="ql-arrow">&rarr;</span>
+                    </button>
+                    <button class="quick-link-card" data-goto="leave">
+                        <div class="ql-icon">📝</div>
+                        <div class="ql-text">
+                            <strong>Leave Form</strong>
+                            <span>Submit requests</span>
+                        </div>
+                        <span class="ql-arrow">&rarr;</span>
+                    </button>
+                </div>
+
+                <!-- STUDENT INFORMATION -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <div>
+                            <h2>Student Information</h2>
+                            <p>Your registered student details</p>
+                        </div>
+                    </div>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Student Name</span>
+                            <strong id="studentName">Loading...</strong>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Student ID</span>
+                            <strong id="studentId">Loading...</strong>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email</span>
+                            <strong id="studentEmail">Loading...</strong>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Account Status</span>
+                            <strong class="status-badge success">Active</strong>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 MY MARKS
+            ====================================================== -->
+            <section id="marksTab" class="tab-content">
+
+                <div class="section-card">
+
+                    <div class="section-header">
+
+                        <div>
+                            <h2>My Marks</h2>
+                            <p>View your examination marks</p>
+                        </div>
+
+                        <div class="filter-group">
+
+                            <select id="marksSemesterFilter">
+                                <option value="all">All Semesters</option>
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+
+                            <select id="marksExamFilter">
+                                <option value="all">All Exams</option>
+                                <option value="model1">Model Exam 1</option>
+                                <option value="model2">Model Exam 2</option>
+                                <option value="model3">Model Exam 3</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="marksContainer">
+                        <div class="empty-state">Loading marks...</div>
                     </div>
 
                 </div>
 
+            </section>
 
-                <div class="student-info-grid">
 
-                    <div>
-                        <span>Student ID</span>
-                        <strong id="studentIdInfo">-</strong>
+            <!-- =====================================================
+                 PERFORMANCE ANALYSIS
+            ====================================================== -->
+            <section id="performanceTab" class="tab-content">
+
+                <div class="section-card">
+
+                    <div class="section-header">
+                        <div>
+                            <h2>CGPA Predictor & Analysis</h2>
+                            <p>AI-powered performance prediction based on your model exam scores</p>
+                        </div>
+                        <div class="filter-group">
+                            <button id="exportPdfBtn" class="export-btn" type="button">📄 Download Report</button>
+                            <select id="performanceSemester">
+                                <option value="1">Semester 1</option>
+                                <option value="2">Semester 2</option>
+                                <option value="3">Semester 3</option>
+                                <option value="4">Semester 4</option>
+                                <option value="5">Semester 5</option>
+                                <option value="6">Semester 6</option>
+                                <option value="7">Semester 7</option>
+                                <option value="8">Semester 8</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div>
-                        <span>Name</span>
-                        <strong id="studentNameInfo">-</strong>
+                    <!-- HERO PREDICTION -->
+                    <div class="pred-hero">
+                        <div class="pred-hero-main">
+                            <div class="pred-gpa-ring" id="gpaRingContainer">
+                                <svg viewBox="0 0 120 120" class="pred-ring-svg">
+                                    <circle cx="60" cy="60" r="52" class="pred-ring-bg"/>
+                                    <circle cx="60" cy="60" r="52" class="pred-ring-fill" id="gpaRingFill"/>
+                                </svg>
+                                <div class="pred-ring-text">
+                                    <span class="pred-ring-value" id="predictedGPA">--</span>
+                                    <span class="pred-ring-label">/ 10</span>
+                                </div>
+                            </div>
+                            <div class="pred-hero-info">
+                                <span class="pred-tag">PREDICTED GPA</span>
+                                <p id="predictionDescription">Prediction will appear after marks are loaded.</p>
+                                <div class="pred-confidence" id="predConfidence"></div>
+                            </div>
+                        </div>
+
+                        <div class="pred-hero-stats">
+                            <div class="pred-stat-item">
+                                <div class="pred-stat-icon green">&#9650;</div>
+                                <div>
+                                    <span>Strongest</span>
+                                    <strong id="strongestSubject">--</strong>
+                                </div>
+                            </div>
+                            <div class="pred-stat-item">
+                                <div class="pred-stat-icon red">&#9660;</div>
+                                <div>
+                                    <span>Needs Focus</span>
+                                    <strong id="weakestSubject">--</strong>
+                                </div>
+                            </div>
+                            <div class="pred-stat-item">
+                                <div class="pred-stat-icon blue">&#9679;</div>
+                                <div>
+                                    <span>Models Used</span>
+                                    <strong id="modelsUsed">--</strong>
+                                </div>
+                            </div>
+                            <div class="pred-stat-item">
+                                <div class="pred-stat-icon purple">&#9670;</div>
+                                <div>
+                                    <span>Max Marks</span>
+                                    <input type="number" id="semesterMaxMarks" value="600" min="1">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                    <div>
-                        <span>Email</span>
-                        <strong id="studentEmailInfo">-</strong>
+                    <!-- WEIGHT BADGES -->
+                    <div class="pred-weights">
+                        <span class="pred-weight-badge w1">Model 1 — 20%</span>
+                        <span class="pred-weight-badge w2">Model 2 — 30%</span>
+                        <span class="pred-weight-badge w3">Model 3 — 50%</span>
+                        <span class="pred-weight-info">Weights auto-adjust for missing exams</span>
+                    </div>
+
+                    <!-- CHARTS ROW: TREND + RADAR -->
+                    <div class="charts-row">
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Performance Trend</h3>
+                                <span class="chart-subtitle">Average scores across model exams</span>
+                            </div>
+                            <div class="chart-canvas-wrap">
+                                <canvas id="trendChart"></canvas>
+                            </div>
+                            <div id="performanceTrend" class="trend-summary"></div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-card-header">
+                                <h3>Subject Strengths</h3>
+                                <span class="chart-subtitle">Predicted scores by subject</span>
+                            </div>
+                            <div class="chart-canvas-wrap radar-wrap">
+                                <canvas id="radarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUBJECT COMPARISON CHART -->
+                    <div class="analysis-section">
+                        <div class="chart-card full-width">
+                            <div class="chart-card-header">
+                                <h3>Subject-wise Comparison</h3>
+                                <span class="chart-subtitle">Model exam scores per subject</span>
+                            </div>
+                            <div class="chart-canvas-wrap bar-wrap">
+                                <canvas id="subjectBarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUBJECT PREDICTIONS -->
+                    <div class="analysis-section">
+                        <div class="analysis-section-header">
+                            <h3>Subject-wise Breakdown</h3>
+                        </div>
+                        <div id="predictionCardsContainer">
+                            <div class="empty-state">Loading predictions...</div>
+                        </div>
+                    </div>
+
+                    <!-- PRIORITY + RECOMMENDATIONS SIDE BY SIDE -->
+                    <div class="pred-bottom-grid">
+
+                        <div class="pred-bottom-card pred-priority-card">
+                            <div class="pred-bottom-header">
+                                <span class="pred-bottom-icon">&#9888;</span>
+                                <h3>Priority Areas</h3>
+                            </div>
+                            <div id="priorityAreas" class="priority-list">
+                                Loading...
+                            </div>
+                        </div>
+
+                        <div class="pred-bottom-card pred-recommend-card">
+                            <div class="pred-bottom-header">
+                                <span class="pred-bottom-icon">&#9733;</span>
+                                <h3>Smart Recommendations</h3>
+                            </div>
+                            <div id="recommendations" class="recommendation-list">
+                                Loading...
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- OVERALL INSIGHT -->
+                    <div class="pred-insight-box">
+                        <div class="pred-insight-icon">&#128161;</div>
+                        <div>
+                            <h3>Overall Insight</h3>
+                            <p id="overallInsight">Loading performance insight...</p>
+                        </div>
                     </div>
 
                 </div>
 
-            </div>
+            </section>
 
 
-            <!-- Subject Performance -->
+            <!-- =====================================================
+                 ATTENDANCE
+            ====================================================== -->
+            <section id="attendanceTab" class="tab-content">
 
-            <div class="content-card">
+                <div class="section-card">
 
-                <div class="card-header">
+                    <div class="section-header">
 
-                    <div>
-                        <span class="card-label">PERFORMANCE</span>
-                        <h2>Subject Performance</h2>
+                        <div>
+                            <h2>Attendance</h2>
+                            <p>View your attendance for the current semester</p>
+                        </div>
+
+                        <select id="attendanceSemester">
+
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- ATTENDANCE ANALYTICS -->
+                    <div class="att-analytics">
+                        <div class="att-ring-card">
+                            <svg viewBox="0 0 120 120" class="att-ring-svg">
+                                <circle cx="60" cy="60" r="52" class="att-ring-bg"/>
+                                <circle cx="60" cy="60" r="52" class="att-ring-fill" id="attRingFill"/>
+                            </svg>
+                            <div class="att-ring-text">
+                                <span class="att-ring-value" id="attendancePercentage">--</span>
+                                <span class="att-ring-label">%</span>
+                            </div>
+                        </div>
+                        <div class="att-stats-col">
+                            <div class="att-stat-row">
+                                <div class="att-stat-box present-box">
+                                    <span>Present</span>
+                                    <strong id="presentDays">0</strong>
+                                </div>
+                                <div class="att-stat-box absent-box">
+                                    <span>Absent</span>
+                                    <strong id="absentDays">0</strong>
+                                </div>
+                                <div class="att-stat-box leave-box">
+                                    <span>Leave Used</span>
+                                    <strong id="leaveDays">0 / 4</strong>
+                                </div>
+                            </div>
+                            <div class="att-chart-area">
+                                <h4>Monthly Attendance</h4>
+                                <div class="att-chart-canvas-wrap">
+                                    <canvas id="attMonthlyChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- ATTENDANCE WARNING -->
+                    <div
+                        id="attendanceWarning"
+                        class="attendance-warning"
+                        style="display:none;"
+                    >
+                        ⚠️ Your attendance is below the recommended level.
+                        Please maintain regular attendance.
+                    </div>
+
+
+                    <!-- CALENDAR -->
+                    <div class="attendance-calendar-card">
+
+    <div class="calendar-header">
+
+        <button id="prevMonth" class="calendar-nav">
+            ←
+        </button>
+
+        <h3 id="calendarMonth">
+            October 2026
+        </h3>
+
+        <button id="nextMonth" class="calendar-nav">
+            →
+        </button>
+
+    </div>
+
+    <div class="calendar-weekdays">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+    </div>
+
+    <div id="attendanceCalendar" class="attendance-calendar"></div>
+
+    <div class="calendar-legend">
+
+        <div>
+            <span class="legend-box present"></span>
+            Present
+        </div>
+
+        <div>
+            <span class="legend-box absent"></span>
+            Absent
+        </div>
+
+        <div>
+            <span class="legend-box on-duty"></span>
+            On-duty
+        </div>
+
+        <div>
+            <span class="legend-box neutral"></span>
+            Not Recorded
+        </div>
+
+        <div>
+            <span class="legend-box today-indicator"></span>
+            Today
+        </div>
+
+    </div>
+
+</div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 LEAVE FORM
+            ====================================================== -->
+            <section id="leaveTab" class="tab-content">
+
+                <div class="section-card">
+
+                    <div class="section-header">
+
+                        <div>
+                            <h2>Leave Form</h2>
+                            <p>Submit and track your leave requests</p>
+                        </div>
+
+                    </div>
+
+
+                    <!-- LEAVE FORM -->
+                    <form id="leaveForm" class="leave-form">
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label for="leaveStudentName">
+                                    Student Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="leaveStudentName"
+                                    readonly
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="leaveDepartment">
+                                    Department
+                                </label>
+
+                                <select id="leaveDepartment" required>
+                                    <option value="">Select department</option>
+                                    <optgroup label="Engineering">
+                                        <option value="CSE">Computer Science and Engineering (CSE)</option>
+                                        <option value="ECE">Electronics and Communication Engineering (ECE)</option>
+                                        <option value="EEE">Electrical and Electronics Engineering (EEE)</option>
+                                        <option value="MECH">Mechanical Engineering</option>
+                                        <option value="IT">Information Technology</option>
+                                        <option value="BT">Biotechnology</option>
+                                        <option value="CHE">Chemical Engineering</option>
+                                        <option value="AI & DS">Artificial Intelligence and Data Science (AI & DS)</option>
+                                        <option value="AI & ML">Artificial Intelligence and Machine Learning (AI & ML)</option>
+                                    </optgroup>
+                                    <optgroup label="Management">
+                                        <option value="MBA">Master of Business Administration (MBA)</option>
+                                        <option value="Integrated MBA">Integrated MBA (5-Year Program)</option>
+                                    </optgroup>
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="leaveSection">
+                                    Section
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="leaveSection"
+                                    placeholder="Enter section"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="leaveSemester">
+                                    Semester
+                                </label>
+
+                                <select id="leaveSemester" required>
+
+                                    <option value="">
+                                        Select Semester
+                                    </option>
+
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
+                                    <option value="5">Semester 5</option>
+                                    <option value="6">Semester 6</option>
+                                    <option value="7">Semester 7</option>
+                                    <option value="8">Semester 8</option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="leaveDaysInput">
+                                    Number of Leave Days
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="leaveDaysInput"
+                                    min="1"
+                                    max="4"
+                                    placeholder="Maximum 4 days"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group full-width">
+
+                            <label for="leaveReason">
+                                Reason
+                            </label>
+
+                            <textarea
+                                id="leaveReason"
+                                rows="4"
+                                placeholder="Enter the reason for your leave..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="leave-form-footer">
+
+                            <div class="leave-limit-info">
+                                <strong>Leave Allowance</strong>
+
+                                <span id="leaveRemainingText">
+                                    4 days remaining
+                                </span>
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="primary-btn"
+                            >
+                                Submit Leave Request
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- LEAVE HISTORY -->
+                <div class="section-card">
+
+                    <div class="section-header">
+
+                        <div>
+                            <h2>Leave Request History</h2>
+                            <p>
+                                Track the status of your submitted requests
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="table-container">
+
+                        <table class="data-table">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Semester</th>
+                                    <th>Days</th>
+                                    <th>Reason</th>
+                                    <th>Submitted</th>
+                                    <th>Status</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="leaveRequestsBody">
+
+                                <tr>
+                                    <td
+                                        colspan="5"
+                                        class="empty-state"
+                                    >
+                                        No leave requests found.
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
                     </div>
 
                 </div>
 
+            </section>
 
-                <div class="table-container">
 
-                    <table>
+            <!-- =====================================================
+                 BUS ROUTES
+            ====================================================== -->
+            <section id="busTab" class="tab-content">
 
-                        <thead>
+                <div class="section-card">
 
-                            <tr>
-                                <th>Subject</th>
-                                <th>Average</th>
-                                <th>Status</th>
-                            </tr>
+                    <div class="section-header">
 
-                        </thead>
+                        <div>
+                            <h2>Bus Routes</h2>
+                            <p>
+                                Find your college bus and view its live
+                                location.
+                            </p>
+                        </div>
 
-                        <tbody id="overviewSubjectsTable">
+                    </div>
 
-                        </tbody>
 
-                    </table>
+                    <!-- JOURNEY TYPE -->
+                    <div class="bus-journey-selector">
 
-                </div>
+                        <button
+                            id="morningJourneyBtn"
+                            class="journey-btn active"
+                            type="button"
+                        >
+                            🌅 Morning
+                            <span>Home → College</span>
+                        </button>
 
-            </div>
+                        <button
+                            id="eveningJourneyBtn"
+                            class="journey-btn"
+                            type="button"
+                        >
+                            🌇 Evening
+                            <span>College → Drop-off</span>
+                        </button>
 
-        </section>
+                    </div>
 
 
+                    <!-- BUS SELECTION -->
+                    <div class="bus-selection-panel">
 
-        <!-- ================= MARKS TAB ================= -->
+                        <div class="form-group">
 
-        <section
-            class="tab-content"
-            id="marksTab"
-        >
+                            <label for="busStopSelect">
+                                Select Your Stop
+                            </label>
 
-            <div class="page-header">
+                            <select id="busStopSelect">
 
-                <span class="page-label">
-                    ACADEMICS
-                </span>
+                                <option value="">
+                                    Select your location / stopping
+                                </option>
 
-                <h1>My Marks</h1>
+                            </select>
 
-                <p>
-                    View your model examination marks.
-                </p>
+                        </div>
 
-            </div>
 
+                        <div class="form-group">
 
-            <!-- Filters -->
+                            <label for="busSelect">
+                                Available Bus
+                            </label>
 
-            <div class="filter-card">
+                            <select id="busSelect">
 
-                <div class="filter-group">
+                                <option value="">
+                                    Select a bus
+                                </option>
 
-                    <label for="marksSemesterFilter">
-                        Semester
-                    </label>
+                            </select>
 
-                    <select id="marksSemesterFilter">
+                        </div>
 
-                        <option value="all">
-                            All Semesters
-                        </option>
+                    </div>
 
-                        <option value="1">Semester 1</option>
-                        <option value="2">Semester 2</option>
-                        <option value="3">Semester 3</option>
-                        <option value="4">Semester 4</option>
-                        <option value="5">Semester 5</option>
-                        <option value="6">Semester 6</option>
-                        <option value="7">Semester 7</option>
-                        <option value="8">Semester 8</option>
 
-                    </select>
-
-                </div>
-
-
-                <div class="filter-group">
-
-                    <label for="marksExamFilter">
-                        Model Exam
-                    </label>
-
-                    <select id="marksExamFilter">
-
-                        <option value="all">
-                            All Model Exams
-                        </option>
-
-                        <option value="1">
-                            Model Exam 1
-                        </option>
-
-                        <option value="2">
-                            Model Exam 2
-                        </option>
-
-                        <option value="3">
-                            Model Exam 3
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-            <!-- Marks table -->
-
-            <div class="content-card">
-
-                <div class="table-container">
-
-                    <table>
-
-                        <thead>
-
-                            <tr>
-
-                                <th>Semester</th>
-                                <th>Exam</th>
-                                <th>Subject</th>
-                                <th>Marks</th>
-                                <th>Percentage</th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody id="marksTableBody">
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- ================= PERFORMANCE ANALYSIS TAB ================= -->
-
-        <section
-            class="tab-content"
-            id="analysisTab"
-        >
-
-            <div class="page-header">
-
-                <span class="page-label">
-                    PERFORMANCE
-                </span>
-
-                <h1>Performance Analysis</h1>
-
-                <p>
-                    Analyze your model examination performance and estimate your semester GPA.
-                </p>
-
-            </div>
-
-
-            <!-- Analysis Controls -->
-
-            <div class="analysis-controls">
-
-                <div class="analysis-control">
-
-                    <label for="analysisSemester">
-                        Select Semester
-                    </label>
-
-                    <select id="analysisSemester">
-
-                        <option value="1">Semester 1</option>
-                        <option value="2">Semester 2</option>
-                        <option value="3">Semester 3</option>
-                        <option value="4">Semester 4</option>
-                        <option value="5">Semester 5</option>
-                        <option value="6">Semester 6</option>
-                        <option value="7">Semester 7</option>
-                        <option value="8">Semester 8</option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="analysis-control">
-
-                    <label for="semesterMaxMarks">
-                        Semester Maximum Marks
-                    </label>
-
-                    <input
-                        type="number"
-                        id="semesterMaxMarks"
-                        value="100"
-                        min="1"
+                    <!-- BUS INFORMATION -->
+                    <div
+                        id="selectedBusInfo"
+                        class="selected-bus-info"
+                        style="display:none;"
                     >
 
-                </div>
+                        <div class="bus-info-item">
 
-            </div>
+                            <span>Bus Number</span>
 
+                            <strong id="selectedBusNumber">
+                                --
+                            </strong>
 
+                        </div>
 
-            <!-- Prediction Summary -->
+                        <div class="bus-info-item">
 
-            <div class="analysis-summary-grid">
+                            <span>Driver</span>
 
+                            <strong id="selectedBusDriver">
+                                --
+                            </strong>
 
-                <!-- PREDICTED GPA -->
+                        </div>
 
-                <div class="analysis-stat-card">
+                        <div class="bus-info-item">
 
-                    <span class="analysis-stat-label">
-                        PREDICTED GPA
-                    </span>
+                            <span>Location Status</span>
 
-                    <div class="analysis-big-number">
+                            <strong id="selectedBusStatus">
+                                --
+                            </strong>
 
-                        <span id="predictedScore">
-                            0.00
-                        </span>
+                        </div>
 
-                        <span class="analysis-unit">
-                            / 10
-                        </span>
+                        <div class="info-item" style="grid-column: 1 / -1;">
+                            <small id="selectedBusLastUpdated" style="display:none; color: #888; font-size: 0.8rem;"></small>
+                        </div>
 
                     </div>
 
 
-                    <div class="progress-bar">
+                    <!-- MAP -->
+                    <div class="map-container">
 
                         <div
-                            id="predictionProgress"
-                            class="progress-fill"
+                            id="busMap"
+                            class="bus-map"
                         ></div>
 
                     </div>
 
-                </div>
 
+                    <!-- BUS LIST -->
+                    <div class="bus-list-section">
 
+                        <div class="analysis-section-header">
 
-                <!-- MODELS USED -->
+                            <h3>
+                                Available Buses
+                            </h3>
 
-                <div class="analysis-stat-card">
+                        </div>
 
-                    <span class="analysis-stat-label">
-                        MODELS USED
-                    </span>
-
-                    <div class="analysis-small-number">
-
-                        <span id="modelsUsed">
-                            0 / 3
-                        </span>
-
-                    </div>
-
-                    <p>
-                        Model examinations available
-                    </p>
-
-                </div>
-
-
-
-                <!-- STRONGEST SUBJECT -->
-
-                <div class="analysis-stat-card">
-
-                    <span class="analysis-stat-label">
-                        STRONGEST SUBJECT
-                    </span>
-
-                    <div class="analysis-subject">
-
-                        <strong id="strongestSubject">
-                            -
-                        </strong>
-
-                    </div>
-
-                    <p id="strongestPercentage">
-                        0.0% predicted
-                    </p>
-
-                </div>
-
-
-
-                <!-- NEEDS ATTENTION -->
-
-                <div class="analysis-stat-card attention-card">
-
-                    <span class="analysis-stat-label">
-                        NEEDS MOST ATTENTION
-                    </span>
-
-                    <div class="analysis-subject">
-
-                        <strong id="weakestSubject">
-                            -
-                        </strong>
-
-                    </div>
-
-                    <p id="weakestPercentage">
-                        0.0% predicted
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Prediction Method -->
-
-            <div class="prediction-method-card">
-
-                <span class="card-label">
-                    PREDICTION METHOD
-                </span>
-
-                <h2>
-                    Weighted Model Analysis
-                </h2>
-
-                <p>
-                    Model 1 contributes 20%, Model 2 contributes 30%, and
-                    Model 3 contributes 50%. If a model is missing, the
-                    available weights are automatically normalized.
-                </p>
-
-            </div>
-
-
-
-            <!-- Subject Predictions -->
-
-            <div class="content-card">
-
-                <div class="card-header">
-
-                    <div>
-
-                        <span class="card-label">
-                            SUBJECT ANALYSIS
-                        </span>
-
-                        <h2>
-                            Subject-wise Prediction
-                        </h2>
+                        <div
+                            id="availableBuses"
+                            class="available-buses"
+                        >
+                            Select your stop to view available buses.
+                        </div>
 
                     </div>
 
                 </div>
 
-
-                <div class="table-container">
-
-                    <table>
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    Subject
-                                </th>
-
-                                <th>
-                                    Predicted %
-                                </th>
-
-                                <th>
-                                    Status
-                                </th>
-
-                            </tr>
-
-                        </thead>
+            </section>
 
 
-                        <tbody id="predictionTableBody">
+            <!-- =====================================================
+                 PROFILE
+            ====================================================== -->
+            <section id="profileTab" class="tab-content">
 
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Trend -->
-
-            <div class="content-card">
-
-                <div class="card-header">
-
-                    <div>
-
-                        <span class="card-label">
-                            PERFORMANCE TREND
-                        </span>
-
-                        <h2>
-                            Overall Trend
-                        </h2>
-
+                <div class="section-card">
+                    <div class="section-header">
+                        <div>
+                            <h2>My Profile</h2>
+                            <p>View and manage your student profile</p>
+                        </div>
                     </div>
 
-                </div>
-
-                <div id="trendContainer">
-
-                    <p id="trendText">
-                        Not enough data to determine trend.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Priority Areas -->
-
-            <div class="content-card">
-
-                <div class="card-header">
-
-                    <div>
-
-                        <span class="card-label">
-                            PRIORITY AREAS
-                        </span>
-
-                        <h2>
-                            Subjects Requiring Attention
-                        </h2>
-
+                    <div class="profile-hero">
+                        <div class="profile-avatar-large" id="profileAvatarLarge">S</div>
+                        <div class="profile-hero-info">
+                            <h2 id="profileName">Loading...</h2>
+                            <span class="profile-role">Student</span>
+                        </div>
                     </div>
 
-                </div>
-
-                <div id="priorityAreas">
-
-                </div>
-
-            </div>
-
-
-
-            <!-- Recommendations -->
-
-            <div class="content-card">
-
-                <div class="card-header">
-
-                    <div>
-
-                        <span class="card-label">
-                            RECOMMENDATIONS
-                        </span>
-
-                        <h2>
-                            Suggested Improvements
-                        </h2>
-
+                    <div class="profile-details-grid">
+                        <div class="profile-detail-card">
+                            <span class="profile-detail-icon">🆔</span>
+                            <div>
+                                <span class="profile-detail-label">Student ID</span>
+                                <strong id="profileStudentId">--</strong>
+                            </div>
+                        </div>
+                        <div class="profile-detail-card">
+                            <span class="profile-detail-icon">📧</span>
+                            <div>
+                                <span class="profile-detail-label">Email</span>
+                                <strong id="profileEmail">--</strong>
+                            </div>
+                        </div>
+                        <div class="profile-detail-card">
+                            <span class="profile-detail-icon">🏫</span>
+                            <div>
+                                <span class="profile-detail-label">Department</span>
+                                <strong id="profileDepartment">--</strong>
+                            </div>
+                        </div>
+                        <div class="profile-detail-card">
+                            <span class="profile-detail-icon">📖</span>
+                            <div>
+                                <span class="profile-detail-label">Current Semester</span>
+                                <strong id="profileSemester">--</strong>
+                            </div>
+                        </div>
+                        <div class="profile-detail-card">
+                            <span class="profile-detail-icon">📊</span>
+                            <div>
+                                <span class="profile-detail-label">Total Marks Records</span>
+                                <strong id="profileMarksCount">0</strong>
+                            </div>
+                        </div>
+                        <div class="profile-detail-card">
+                            <span class="profile-detail-icon">📅</span>
+                            <div>
+                                <span class="profile-detail-label">Attendance Rate</span>
+                                <strong id="profileAttendance">--%</strong>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
 
-                <div id="recommendations">
-
-                </div>
-
-            </div>
+            </section>
 
 
-
-            <!-- Overall Insight -->
-
-            <div class="content-card">
-
-                <div class="card-header">
-
-                    <div>
-
-                        <span class="card-label">
-                            OVERALL INSIGHT
-                        </span>
-
-                        <h2>
-                            Performance Summary
-                        </h2>
-
-                    </div>
-
-                </div>
-
-                <div id="overallInsight">
-
-                    <p>
-                        Select a semester to view your performance analysis.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
+        </div>
 
     </main>
 
 
+    <!-- TOAST CONTAINER -->
+    <div id="toastContainer" class="toast-container"></div>
 
-    <!-- Firebase / Application -->
+    <!-- =========================
+         LOADING OVERLAY
+    ========================== -->
+    <div
+        id="loadingOverlay"
+        class="loading-overlay"
+    >
 
-    <script type="module" src="homestdebt.js"></script>
+        <div class="loading-box">
+
+            <div class="loader"></div>
+
+            <p>Loading your dashboard...</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         FIREBASE + LEAFLET
+    ========================== -->
+
+    <script type="module">
+
+        import { initializeApp }
+            from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+        import {
+            getAuth,
+            onAuthStateChanged,
+            signOut
+        }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        import {
+            getFirestore
+        }
+        from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyByRLQj6i2c2GhM21-cmRkSISbIVbfyZQU",
+
+            authDomain:
+                "student-progress-tracker-33064.firebaseapp.com",
+
+            projectId:
+                "student-progress-tracker-33064",
+
+            storageBucket:
+                "student-progress-tracker-33064.firebasestorage.app",
+
+            messagingSenderId:
+                "549690484739",
+
+            appId:
+                "1:549690484739:web:903b227ae9d9a238ae8636",
+
+            measurementId:
+                "G-30WQXGEKT8"
+
+        };
+
+
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app);
+
+        const db = getFirestore(app);
+
+
+        window.firebaseApp = app;
+
+        window.firebaseAuth = auth;
+
+        window.firebaseDB = db;
+
+        window.firebaseOnAuthStateChanged =
+            onAuthStateChanged;
+
+        window.firebaseSignOut =
+            signOut;
+
+
+        /*
+         * Wait until Firebase objects are available,
+         * then load the main dashboard JavaScript.
+         */
+
+        const script = document.createElement("script");
+
+        script.type = "module";
+
+        script.src = "homestdebt.js";
+
+        document.body.appendChild(script);
+
+    </script>
+
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+
+    <!-- jsPDF for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+
+    <!-- Leaflet -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        crossorigin=""
+    ></script>
+
+    <script>
+        window._chartjsReady = typeof Chart !== "undefined";
+    </script>
 
 </body>
 </html>
