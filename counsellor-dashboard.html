@@ -6,7 +6,14 @@
 
     <title>Counsellor Dashboard - StudentTrack</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="counsellor-dashboard.css">
+
+    <link rel="stylesheet" href="./dark-mode.css">
+    <script src="./dark-mode.js"></script>
 </head>
 
 <body>
@@ -36,6 +43,16 @@
             <button class="nav-item" onclick="showSection('marks')">
                 <span>📝</span>
                 Upload Marks
+            </button>
+
+            <button class="nav-item" onclick="showSection('attendance')">
+                <span>📅</span>
+                Attendance
+            </button>
+
+            <button class="nav-item" onclick="showSection('leave')">
+                <span>📋</span>
+                Leave Requests
             </button>
         </nav>
 
@@ -420,6 +437,91 @@
 
         </section>
 
+
+        <section id="attendanceSection" class="section">
+
+            <div class="section-header">
+                <div>
+                    <h2>Student Attendance</h2>
+                    <p>Mark present, absent or On-duty for your students</p>
+                </div>
+            </div>
+
+            <div class="form-card attendance-controls-card">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="attendanceDate">Attendance Date</label>
+                        <input type="date" id="attendanceDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendanceSemester">Semester</label>
+                        <select id="attendanceSemester">
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="attendance-actions">
+                    <button type="button" id="markAllPresentBtn" class="secondary-button">✓ Mark All Present</button>
+                    <button type="button" id="saveAttendanceBtn" class="primary-button">Save Attendance</button>
+                </div>
+
+                <p id="attendanceMessage" class="message"></p>
+                <div class="attendance-rule"><strong>Leave rule:</strong> Each student can use a maximum of 4 leave days per semester.</div>
+            </div>
+
+            <div class="table-card attendance-table-card">
+                <div class="table-header">
+                    <div>
+                        <h3>Students</h3>
+                        <p>Select the attendance status for each student.</p>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Student ID</th><th>Student Name</th><th>Email</th><th>Status</th></tr></thead>
+                        <tbody id="attendanceTableBody">
+                            <tr><td colspan="4" class="empty">Loading students...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- LEAVE REQUESTS SECTION -->
+        <section id="leaveSection" class="section">
+
+            <div class="section-header">
+                <div>
+                    <h2>Leave Requests</h2>
+                    <p>Review and approve student leave applications</p>
+                </div>
+
+                <div class="leave-filter-group">
+                    <select id="leaveStatusFilter">
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="all">All Requests</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="leaveRequestsContainer">
+                <div class="loading-card">Loading leave requests...</div>
+            </div>
+
+        </section>
+
     </main>
 
 
@@ -498,6 +600,8 @@
 
     </div>
 
+
+    <button id="darkToggleFloat" class="dark-toggle-float"></button>
 
     <script type="module" src="counsellor-dashboard.js"></script>
 
